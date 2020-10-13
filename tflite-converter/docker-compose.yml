@@ -1,0 +1,18 @@
+version: '3'
+services:
+        factory4:
+                container_name: tflite-converter
+                build:
+                        context: ./
+                        dockerfile: Dockerfile
+                command: /home/tflite-converter/entrypoint.sh
+                runtime: nvidia
+                environment:
+                        - "BLOB_MODEL_UPLOAD_PATH=${BLOB_MODEL_UPLOAD_PATH}"
+                        - "EXPORTED_MODEL_SAVED_PATH=${EXPORTED_MODEL_SAVED_PATH}"
+                        - "AZURE_STORAGE_CONNECTION_STRING=DefaultEndpointsProtocol=https;AccountName=storagefactory4kr;AccountKey=TvKtjxdsvNZgUz4V5/4r/1vaQu6rkUxvym3o2JdXKO/5C7FB4X1UcoGvjpoZCI7nmgmcl34PbYlsO/J0HK8tRA==;EndpointSuffix=core.windows.net"
+
+                volumes:
+                        - /datadrive/jlee/workspace/object-detector/models/exported-models:/home/tflite-converter/exported-models 
+                        - /datadrive/jlee/workspace/tflite-converter/entrypoint.sh:/home/tflite-converter/entrypoint.sh
+                        - /datadrive/jlee/workspace/tflite-converter/scripts:/home/tflite-converter/scripts
