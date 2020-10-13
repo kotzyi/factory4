@@ -1,0 +1,25 @@
+version: '3'
+services:
+        factory4:
+                container_name: object-detector
+                image: kotzyi/factory4:0.0.3
+                command: /home/detector/entrypoint.sh
+                runtime: nvidia
+                environment:
+                        - "TRAIN_IMAGE_PATH=${TRAIN_IMAGE_PATH}"
+                        - "TRAIN_IMAGE_LABEL_PATH=${TRAIN_IMAGE_LABEL_PATH}"
+                        - "TRAIN_IMAGE_TFRECORD_PATH=${TRAIN_IMAGE_TFRECORD_PATH}"
+                        - "TEST_IMAGE_PATH=${TEST_IMAGE_PATH}"
+                        - "TEST_IMAGE_LABEL_PATH=${TEST_IMAGE_LABEL_PATH}"
+                        - "TEST_IMAGE_TFRECORD_PATH=${TEST_IMAGE_TFRECORD_PATH}"
+                        - "MODEL_PATH=${MODEL_PATH}"
+                        - "MODEL_PIPELINE_CONFIG_PATH=${MODEL_PIPELINE_CONFIG_PATH}"
+                        - "INPUT_TYPE=${INPUT_TYPE}"
+                        - "TRAINED_CHECKPOINT_PATH=${TRAINED_CHECKPOINT_PATH}"
+                        - "MODEL_OUTPUT_PATH=${MODEL_OUTPUT_PATH}"
+                volumes:
+                        - /datadrive/jlee/workspace/object-detector/images:/home/detector/workspace/images 
+                        - /datadrive/jlee/workspace/object-detector/annotations/:/home/detector/workspace/annotations 
+                        - /datadrive/jlee/workspace/object-detector/models:/home/detector/workspace/models 
+                        - /datadrive/jlee/workspace/object-detector/entrypoint.sh:/home/detector/entrypoint.sh
+                        - /datadrive/jlee/workspace/object-detector/scripts:/home/detector/scripts
