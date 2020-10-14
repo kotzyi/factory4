@@ -136,3 +136,4 @@ dmypy.json
 saved_model/
 checkpoint/
 trained-models/
+.idea
