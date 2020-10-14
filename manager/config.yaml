@@ -1,0 +1,55 @@
+kafka:
+    object_detector:
+        bootstrap_servers: 52.141.56.0:9092
+        producer: &default_producer
+            partition: 0
+            topic: CVT_TF_MDL
+        consumer: &default_consumer
+            consumer_group_id: OBJECT_DETECTOR
+            topic: RESP_CVT_TF_MDL
+            consumer_timeout_ms: 5000
+    tflite_converter:
+        bootstrap_servers: 52.141.56.0:9092
+        producer:
+            <<: *default_producer
+            topic: FIN_CRT_MDL
+        consumer:
+            <<: *default_consumer
+            consumer_group_id: TF_CONVERTER
+            topic: CVT_TF_MDL
+
+docker:
+    object_detector:
+        project_dir: /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector
+        image: kotzyi/factory4:0.0.3
+        command: /home/detector/entrypoint.sh
+        runtime: nvidia
+        environment:
+            - TRAIN_IMAGE_PATH=/home/detector/workspace/images/train
+            - TRAIN_IMAGE_LABEL_PATH=/home/detector/workspace/annotations/label_map.pbtxt
+            - TRAIN_IMAGE_TFRECORD_PATH=/home/detector/workspace/annotations/train.record
+            - TEST_IMAGE_PATH=/home/detector/workspace/images/test
+            - TEST_IMAGE_LABEL_PATH=/home/detector/workspace/annotations/label_map.pbtxt
+            - TEST_IMAGE_TFRECORD_PATH=/home/detector/workspace/annotations/test.record
+            - MODEL_PATH=/home/detector/workspace/models/trained-models
+            - MODEL_PIPELINE_CONFIG_PATH=/home/detector/workspace/models/trained-models/pipeline.config
+            - INPUT_TYPE=image_tensor
+            - MODEL_OUTPUT_PATH=/home/detector/workspace/models/exported-models
+            - TRAINED_CHECKPOINT_PATH=/home/detector/workspace/models/trained-models
+        volumes:
+            - /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector/images:/home/detector/workspace/images
+            - /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector/annotations/:/home/detector/workspace/annotations
+            - /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector/models:/home/detector/workspace/models
+            - /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector/entrypoint.sh:/home/detector/entrypoint.sh
+            - /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector/scripts:/home/detector/scripts
+    tflite_converter:
+        image: tflite-converter_factory4:latest
+        command: /home/tflite-converter/entrypoint.sh
+        runtime: nvidia
+        environment:
+            - EXPORTED_MODEL_SAVED_PATH=/home/tflite-converter/exported-models/saved_model
+            - AZURE_STORAGE_CONNECTION_STRING=
+        volumes:
+            - /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector/models/exported-models:/home/tflite-converter/exported-models
+            - /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite-converter/entrypoint.sh:/home/tflite-converter/entrypoint.sh
+            - /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite-converter/scripts:/home/tflite-converter/scripts
