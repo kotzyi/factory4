@@ -20,7 +20,7 @@ kafka:
 
 docker:
     object_detector:
-        project_dir: /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector
+        build_context: /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector
         image: kotzyi/factory4:0.0.3
         command: /home/detector/entrypoint.sh
         runtime: nvidia
@@ -43,6 +43,7 @@ docker:
             - /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector/entrypoint.sh:/home/detector/entrypoint.sh
             - /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector/scripts:/home/detector/scripts
     tflite_converter:
+        build_context: /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite_converter
         image: tflite-converter_factory4:latest
         command: /home/tflite-converter/entrypoint.sh
         runtime: nvidia

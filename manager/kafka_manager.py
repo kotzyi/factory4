@@ -36,8 +36,8 @@ class ObjectDetectManager(KafkaManager):
     def consume(self, docker_manager):
         for msg in self.consumer:
             docker_manager.run()
-
-        self.consumer.close()
+            self.produce("{'test':1}")
+            print("!!!!!!!!!!!!!")
 
 
 class TFConverterManager(KafkaManager):
@@ -47,5 +47,6 @@ class TFConverterManager(KafkaManager):
     def consume(self, docker_manager):
         for msg in self.consumer:
             docker_manager.run()
+            self.produce("{'test':2}")
+            print("!!!!!!!!!!!!!")
 
-        self.consumer.close()
