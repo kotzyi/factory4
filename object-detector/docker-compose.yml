@@ -23,5 +23,3 @@ services:
                         - /datadrive/jlee/workspace/object-detector/models:/home/detector/workspace/models 
                         - /datadrive/jlee/workspace/object-detector/entrypoint.sh:/home/detector/entrypoint.sh
                         - /datadrive/jlee/workspace/object-detector/scripts:/home/detector/scripts
-
-df

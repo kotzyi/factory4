@@ -20,16 +20,30 @@ class KafkaManager:
         self.consumer.subscribe(topics=conf.consumer.topic.split(','))
 
     def produce(self, value):
-        self.producer.send(self.conf.producer.topic, value)
+        self.producer.send(topic=self.conf.producer.topic, value=value)# .add_callback(self.on_send_success).add_errback(self.on_send_error)
 
     def consume(self, docker_manager):
         pass
 
+    def poll(self, duration):
+        return self.consumer.poll(duration)
+
     def commit(self):
         self.consumer.commit()
 
+    def close(self):
+        self.consumer.close()
 
-class ObjectDetectManager(KafkaManager):
+    def on_send_success(record_metadata):
+        print(record_metadata.topic)
+        print(record_metadata.partition)
+        print(record_metadata.offset)
+
+    def on_send_error(excp):
+        print('I am an errback')
+
+
+class ObjectDetectKafkaManager(KafkaManager):
     def __init__(self, conf):
         super().__init__(conf)
 
@@ -40,7 +54,7 @@ class ObjectDetectManager(KafkaManager):
             print("!!!!!!!!!!!!!")
 
 
-class TFConverterManager(KafkaManager):
+class TFConverterKafkaManager(KafkaManager):
     def __init__(self, conf):
         super().__init__(conf)
 
@@ -49,4 +63,6 @@ class TFConverterManager(KafkaManager):
             docker_manager.run()
             self.produce("{'test':2}")
             print("!!!!!!!!!!!!!")
+
+
 
