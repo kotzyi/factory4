@@ -10,8 +10,8 @@ services:
                 environment:
                         - "BLOB_MODEL_UPLOAD_PATH=${BLOB_MODEL_UPLOAD_PATH}"
                         - "EXPORTED_MODEL_SAVED_PATH=${EXPORTED_MODEL_SAVED_PATH}"
-                        - "AZURE_STORAGE_CONNECTION_STRING=""
+                        - "AZURE_STORAGE_CONNECTION_STRING"
                 volumes:
-                        - /datadrive/jlee/workspace/object-detector/models/exported-models:/home/tflite-converter/exported-models 
-                        - /datadrive/jlee/workspace/tflite-converter/entrypoint.sh:/home/tflite-converter/entrypoint.sh
-                        - /datadrive/jlee/workspace/tflite-converter/scripts:/home/tflite-converter/scripts
+                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector/models/exported-models:/home/tflite-converter/exported-models
+                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite-converter/entrypoint.sh:/home/tflite-converter/entrypoint.sh
+                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite-converter/scripts:/home/tflite-converter/scripts
