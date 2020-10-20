@@ -1,5 +1,3 @@
-From kotzyi/factory4:0.0.3
+FROM kotzyi/factory4:0.1.0
 
-RUN apt-get update
-
-COPY ./entrypoint.sh /home/detector/entrypoint.sh
+RUN pip install azure-storage-file-share

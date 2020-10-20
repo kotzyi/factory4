@@ -11,4 +11,4 @@ MODEL_PIPELINE_CONFIG_PATH=/home/detector/workspace/models/trained-models/pipeli
 INPUT_TYPE=image_tensor \
 MODEL_OUTPUT_PATH=/home/detector/workspace/models/exported-models \
 TRAINED_CHECKPOINT_PATH=/home/detector/workspace/models/trained-models \
-docker-compose up 
+docker-compose up --build

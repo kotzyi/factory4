@@ -11,7 +11,9 @@ class DockerManager:
         #         tag=self.conf.image
         #     )
 
-    def run(self):
+    def run(self, envs):
+        for key, value in envs.items():
+            self.conf.environment.append(key + "=" + value)
         self.client.containers.run(
             image=self.conf.image,
             command=self.conf.command,

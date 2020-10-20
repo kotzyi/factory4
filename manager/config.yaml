@@ -4,15 +4,27 @@ kafka:
         producer: &default_producer
             partition: 0
             topic: CVT_TF_MDL
+            msg_format:
+                - factory_id
+                - model_id
         consumer: &default_consumer
             consumer_group_id: OBJECT_DETECTOR
-            topic: RESP_CVT_TF_MDL
+            topic: REQ_CVT_TF_MDL
             consumer_timeout_ms: 5000
+            sleep: 3
+            max_records: 1
+            msg_format:
+                - share_name
+                - factory_id
+                - model_id
     tflite_converter:
         bootstrap_servers: 52.141.56.0:9092
         producer:
             <<: *default_producer
             topic: FIN_CRT_MDL
+            msg_format:
+                - factory_id
+                - model_id
         consumer:
             <<: *default_consumer
             consumer_group_id: TF_CONVERTER
@@ -21,7 +33,7 @@ kafka:
 docker:
     object_detector:
         build_context: /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector
-        image: kotzyi/factory4:0.0.3
+        image: kotzyi/factory4:0.1.0
         command: /home/detector/entrypoint.sh
         runtime: nvidia
         environment:
@@ -36,6 +48,7 @@ docker:
             - INPUT_TYPE=image_tensor
             - MODEL_OUTPUT_PATH=/home/detector/workspace/models/exported-models
             - TRAINED_CHECKPOINT_PATH=/home/detector/workspace/models/trained-models
+            - AZURE_STORAGE_CONNECTION_STRING=
         volumes:
             - /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector/images:/home/detector/workspace/images
             - /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector/annotations/:/home/detector/workspace/annotations

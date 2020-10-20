@@ -25,8 +25,8 @@ class KafkaManager:
     def consume(self, docker_manager):
         pass
 
-    def poll(self, duration):
-        return self.consumer.poll(duration)
+    def poll(self, timeout_ms, max_records):
+        return self.consumer.poll(timeout_ms=timeout_ms, max_records=max_records)
 
     def commit(self):
         self.consumer.commit()

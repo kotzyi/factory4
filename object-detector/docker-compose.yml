@@ -2,7 +2,7 @@ version: '3'
 services:
         factory4:
                 container_name: object-detector
-                image: kotzyi/factory4:0.0.3
+                image: kotzyi/factory4:0.1.0
                 command: /home/detector/entrypoint.sh
                 runtime: nvidia
                 environment:
