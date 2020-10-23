@@ -20,7 +20,7 @@ class KafkaManager:
         self.consumer.subscribe(topics=conf.consumer.topic.split(','))
 
     def produce(self, value):
-        self.producer.send(topic=self.conf.producer.topic, value=value)# .add_callback(self.on_send_success).add_errback(self.on_send_error)
+        self.producer.send(topic=self.conf.producer.topic, value=value)
 
     def consume(self, docker_manager):
         pass
@@ -51,7 +51,6 @@ class ObjectDetectKafkaManager(KafkaManager):
         for msg in self.consumer:
             docker_manager.run()
             self.produce("{'test':1}")
-            print("!!!!!!!!!!!!!")
 
 
 class TFConverterKafkaManager(KafkaManager):
@@ -62,7 +61,3 @@ class TFConverterKafkaManager(KafkaManager):
         for msg in self.consumer:
             docker_manager.run()
             self.produce("{'test':2}")
-            print("!!!!!!!!!!!!!")
-
-
-

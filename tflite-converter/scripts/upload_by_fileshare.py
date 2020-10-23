@@ -1,4 +1,5 @@
 import os
+import argparse
 from azure.core.exceptions import (
     ResourceExistsError,
     ResourceNotFoundError
@@ -32,14 +33,18 @@ def upload_local_file(connection_string, local_file_path, share_name, dest_file_
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-s", "--share_name", default="", type=str, help="share name of azure fileshare")
+    parser.add_argument("-d", "--dir_path", default="", type=str, help="directory path of azure fileshare")
+    parser.add_argument("-l", "--local_dir_path", default="", type=str, help="local file path of model file")
+    parser.add_argument("-f", "--model_file_name", default="model.tflite", type=str, help="model file name")
+    args = parser.parse_args()
+
     connection_string = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
+    local_file_path = os.path.join(args.local_dir_path, args.model_file_name)
+    dest_file_path = os.path.join(args.dir_path, args.model_file_name)
+    upload_local_file(connection_string, local_file_path, args.share_name, dest_file_path)
 
-    local_file_path = "/home/tflite-converter/exported-models/model.tflite"  # os.path.join(local_path, local_file_name)
-    share_name = "models"
-
-    dest_file_path = "test/1/model.tflite"
-    # Create a ShareServiceClient from a connection string
-    upload_local_file(connection_string, local_file_path, share_name, dest_file_path)
 
 if __name__ == '__main__':
     main()

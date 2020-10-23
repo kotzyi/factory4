@@ -1,26 +1,34 @@
+import time
+import json
 from manager.kafka_manager import TFConverterKafkaManager
 from manager.config import KafkaConfig
 from manager.config import DockerConfig
 from manager.docker_manager import DockerManager
-import time
 
 
 def main():
-    tflite_converter = DockerManager(DockerConfig.tflite_converter)
-    tflite_converter_kafka_manager = TFConverterKafkaManager(KafkaConfig.tflite_converter)
+    docker_conf = DockerConfig.tflite_converter
+    kafka_conf = KafkaConfig.tflite_converter
+    tflite_converter = DockerManager(docker_conf)
+    tflite_converter_kafka_manager = TFConverterKafkaManager(kafka_conf)
 
     while True:
-        message = tflite_converter_kafka_manager.poll(0)
+        message = tflite_converter_kafka_manager.poll(
+            timeout_ms=kafka_conf.consumer.consumer_timeout_ms,
+            max_records=kafka_conf.consumer.max_records)
+
         if message:
-            print(message)
-            tflite_converter.run()
-            tflite_converter_kafka_manager.produce("{'test':2}")
+            envs = {}
+            for key, value in message.items():
+                envs = value[0].value
+                print(envs)
+
+            tflite_converter.run(envs)
+
+            # tflite_converter_kafka_manager.produce(envs)
         else:
-            time.sleep(10)
-
-    converter_manager.close()
-
+            time.sleep(kafka_conf.consumer.sleep)
 
 if __name__ == "__main__":
-    # test
     main()
+

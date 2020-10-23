@@ -1,10 +1,7 @@
 import unittest
-from manager.kafka_manager import ObjectDetectKafkaManager, TFConverterKafkaManager
 from manager.config import KafkaConfig
-from manager.config import DockerConfig
-from manager.docker_manager import DockerManager
 import json
-from kafka import KafkaProducer, KafkaConsumer
+from kafka import KafkaProducer
 from bson import json_util
 
 
@@ -13,7 +10,8 @@ class TestStringMethods(unittest.TestCase):
     def test_produce_msg(self):
         msg = {}
         msg['AZURE_SHARE_NAME'] = 'models'
-        msg['AZURE_DIR_PATH'] = 'test/1'
+        msg['AZURE_IMAGE_DIR_PATH'] = 'test/images'
+        msg['AZURE_LABEL_DIR_PATH'] = 'test/annotations'
         json_msg = json.dumps(msg)
 
         self.producer = KafkaProducer(

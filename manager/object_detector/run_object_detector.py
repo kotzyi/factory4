@@ -20,9 +20,10 @@ def main():
             envs = {}
             for key, value in message.items():
                 envs = json.loads(value[0].value)
+                print(envs)
 
             object_detector.run(envs)
-            # object_detect_kafka_manager.produce("{'test':2}")
+            # object_detect_kafka_manager.produce(envs)
         else:
             time.sleep(kafka_conf.consumer.sleep)
 

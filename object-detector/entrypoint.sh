@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "DOWNLOAD IMAGES FROM FILESHARE"
-python /home/detector/scripts/download_from_fileshare.py -s $AZURE_SHARE_NAME -d $AZURE_DIR_PATH -l $TRAIN_IMAGE_PATH
+python /home/detector/scripts/download_from_fileshare.py -s $AZURE_SHARE_NAME -id $AZURE_IMAGE_DIR_PATH -ld $AZURE_LABEL_DIR_PATH -l $IMAGE_LABEL_DIR -i $TRAIN_IMAGE_PATH
 
 echo "CREATE TRAIN TFRECORD"
 python /home/detector/scripts/generate_tfrecord.py -x $TRAIN_IMAGE_PATH -l $TRAIN_IMAGE_LABEL_PATH -o $TRAIN_IMAGE_TFRECORD_PATH

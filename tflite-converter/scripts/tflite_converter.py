@@ -1,18 +1,28 @@
+import os
 import argparse
 import tensorflow as tf
 
 
-parser = argparse.ArgumentParser()
+def main():
+    parser = argparse.ArgumentParser()
 
-parser.add_argument("-d", "--saved_model_dir", default="", type=str, help="Path to the folder where the exported model files are stored")
-# parser.add_argument("-u", "--upload_model_path", type=str, help="Path ot the blob path where the tensorflow lite model files are stored")
+    parser.add_argument("-d", "--saved_model_dir", default="", type=str,
+                        help="Path to the folder where the exported model files are stored")
+    parser.add_argument("-f", "--model_file_name", default="model.tflite", type=str,
+                        help="File name of converted model")
+    args = parser.parse_args()
 
-args = parser.parse_args()
+    converter = tf.lite.TFLiteConverter.from_saved_model(args.saved_model_dir)
+    converter.optimizations = [tf.lite.Optimize.DEFAULT]
+    converter.experimental_new_converter = True
+    converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS, tf.lite.OpsSet.SELECT_TF_OPS]
+    tflite_model = converter.convert()
 
-converter = tf.lite.TFLiteConverter.from_saved_model(args.saved_model_dir)
-converter.optimizations = [tf.lite.Optimize.DEFAULT]
-converter.experimental_new_converter = True
-converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS, tf.lite.OpsSet.SELECT_TF_OPS]
-tflite_model = converter.convert()
+    model_file_path = os.path.join(args.saved_model_dir, args.model_file_name)
 
-open("/home/tflite-converter/exported-models/model.tflite", "wb").write(tflite_model)
+    with open(model_file_path, "wb") as f:
+        f.write(tflite_model)
+
+
+if __name__ == "__main__":
+    main()

@@ -37,6 +37,7 @@ docker:
         command: /home/detector/entrypoint.sh
         runtime: nvidia
         environment:
+            - IMAGE_LABEL_DIR=/home/detector/workspace/annotations/
             - TRAIN_IMAGE_PATH=/home/detector/workspace/images/train
             - TRAIN_IMAGE_LABEL_PATH=/home/detector/workspace/annotations/label_map.pbtxt
             - TRAIN_IMAGE_TFRECORD_PATH=/home/detector/workspace/annotations/train.record
