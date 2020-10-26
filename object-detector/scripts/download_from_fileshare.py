@@ -19,20 +19,22 @@ def list_files_in_azure_directory(connection_string, share_name, dir_path):
         parent_dir = ShareDirectoryClient.from_connection_string(conn_str=connection_string, share_name=share_name,
                                                                  directory_path=dir_path)
         for item in list(parent_dir.list_directories_and_files()):
-            if not item['is_directory']:
-                files.append(item['name'])
+            if item['is_directory']:
+                files += (list_files_in_azure_directory(
+                    connection_string, share_name, os.path.join(dir_path, item['name'])))
+            else:
+                files.append(os.path.join(dir_path, item['name']))
+
         return files
     except ResourceNotFoundError as ex:
         print("ResourceNotFoundError:", ex.message)
 
 
-def download_azure_file(connection_string, share_name, dir_path, file_name, local_dir_path):
+def download_azure_file(connection_string, share_name, source_file_path, local_dir_path):
     try:
-        # Build the remote path
-        source_file_path = dir_path + "/" + file_name
-
         # Add a prefix to the filename to
         # distinguish it from the uploaded file
+        file_name = source_file_path.split("/")[-1]
         dest_file_name = os.path.join(local_dir_path, file_name)
 
         # Create a ShareFileClient from a connection string
@@ -69,14 +71,14 @@ def main():
     label_dir_path = args.label_dir_path
     local_image_path = args.local_image_path
     local_image_label_path = args.local_image_label_path
-    image_file_list = list_files_in_azure_directory(connection_string, share_name, image_dir_path)
-    image_label_file_list = list_files_in_azure_directory(connection_string, share_name, label_dir_path)
+    image_file_path_list = list_files_in_azure_directory(connection_string, share_name, image_dir_path)
+    image_label_file_path_list = list_files_in_azure_directory(connection_string, share_name, label_dir_path)
 
-    for file_name in image_file_list:
-        download_azure_file(connection_string, share_name, image_dir_path, file_name, local_image_path)
+    for file_path in image_file_path_list:
+        download_azure_file(connection_string, share_name, file_path, local_image_path)
 
-    for file_name in image_label_file_list:
-        download_azure_file(connection_string, share_name, label_dir_path, file_name, local_image_label_path)
+    for file_path in image_label_file_path_list:
+        download_azure_file(connection_string, share_name, file_path, local_image_label_path)
 
 
 if __name__ == '__main__':
