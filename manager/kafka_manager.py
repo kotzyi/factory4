@@ -23,7 +23,9 @@ class KafkaManager:
         self.producer.send(topic=self.conf.producer.topic, value=value)
 
     def consume(self, docker_manager):
-        pass
+        for msg in self.consumer:
+            docker_manager.run()
+            self.produce("{'test':2}")
 
     def poll(self, timeout_ms, max_records):
         return self.consumer.poll(timeout_ms=timeout_ms, max_records=max_records)
@@ -41,23 +43,3 @@ class KafkaManager:
 
     def on_send_error(excp):
         print('I am an errback')
-
-
-class ObjectDetectKafkaManager(KafkaManager):
-    def __init__(self, conf):
-        super().__init__(conf)
-
-    def consume(self, docker_manager):
-        for msg in self.consumer:
-            docker_manager.run()
-            self.produce("{'test':1}")
-
-
-class TFConverterKafkaManager(KafkaManager):
-    def __init__(self, conf):
-        super().__init__(conf)
-
-    def consume(self, docker_manager):
-        for msg in self.consumer:
-            docker_manager.run()
-            self.produce("{'test':2}")
