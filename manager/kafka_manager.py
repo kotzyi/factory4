@@ -35,11 +35,3 @@ class KafkaManager:
 
     def close(self):
         self.consumer.close()
-
-    def on_send_success(record_metadata):
-        print(record_metadata.topic)
-        print(record_metadata.partition)
-        print(record_metadata.offset)
-
-    def on_send_error(excp):
-        print('I am an errback')
