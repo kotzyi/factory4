@@ -56,19 +56,16 @@ def download_azure_file(connection_string, share_name, source_file_path, local_d
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-s", "--share_name", default="", type=str, help="share name of azure fileshare")
-    parser.add_argument("-id", "--image_dir_path", default="", type=str, help="directory path of azure fileshare")
-    parser.add_argument("-ld", "--label_dir_path", default="", type=str, help="directory path of azure fileshare")
     parser.add_argument("-i", "--local_image_path", default="", type=str, help="local file path of download files")
     parser.add_argument("-l", "--local_image_label_path", default="", type=str, help="local image label file path of download files")
 
     args = parser.parse_args()
 
     connection_string = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
+    share_name = os.getenv('AZURE_SHARE_NAME')
+    label_dir_path = os.getenv('AZURE_LABEL_DIR_PATH')
+    image_dir_path = os.getenv('AZURE_IMAGE_DIR_PATH')
 
-    share_name = args.share_name
-    image_dir_path = args.image_dir_path
-    label_dir_path = args.label_dir_path
     local_image_path = args.local_image_path
     local_image_label_path = args.local_image_label_path
     image_file_path_list = list_files_in_azure_directory(connection_string, share_name, image_dir_path)

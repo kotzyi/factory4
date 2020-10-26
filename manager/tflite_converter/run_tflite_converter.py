@@ -1,4 +1,5 @@
 import time
+import json
 import logging
 from manager.kafka_manager import KafkaManager
 from manager.config import KafkaConfig
@@ -29,7 +30,7 @@ def main():
         if message:
             envs = {}
             for key, value in message.items():
-                envs = value[0].value
+                envs = json.loads(value[0].value)
 
             logger.info(f"MSG RECEIVED")
             logger.info(f"TOPIC: {kafka_conf.consumer.topic}")

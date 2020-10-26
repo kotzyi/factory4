@@ -14,7 +14,7 @@ class TestStringMethods(unittest.TestCase):
         msg['AZURE_SHARE_NAME'] = "learn-info"
         msg['AZURE_IMAGE_DIR_PATH'] = "233/252/user"
         msg['AZURE_LABEL_DIR_PATH'] = "233/252/annotations"
-        json_msg = json.dumps(msg)
+        msg['AZURE_MODEL_DIR_PATH'] = "233/252/model"
 
         self.producer = KafkaProducer(
             bootstrap_servers=KafkaConfig.object_detector.bootstrap_servers,
