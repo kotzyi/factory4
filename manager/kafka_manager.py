@@ -22,11 +22,6 @@ class KafkaManager:
     def produce(self, value):
         self.producer.send(topic=self.conf.producer.topic, value=value)
 
-    def consume(self, docker_manager):
-        for msg in self.consumer:
-            docker_manager.run()
-            self.produce("{'test':2}")
-
     def poll(self, timeout_ms, max_records):
         return self.consumer.poll(timeout_ms=timeout_ms, max_records=max_records)
 
