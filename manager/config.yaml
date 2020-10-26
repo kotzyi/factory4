@@ -47,7 +47,7 @@ docker:
             - INPUT_TYPE=image_tensor
             - MODEL_OUTPUT_PATH=/home/detector/workspace/models/exported-models
             - TRAINED_CHECKPOINT_PATH=/home/detector/workspace/models/trained-models
-            - AZURE_STORAGE_CONNECTION_STRING=
+            - AZURE_STORAGE_CONNECTION_STRING=DefaultEndpointsProtocol=https;AccountName=storagefactory4kr;AccountKey=TvKtjxdsvNZgUz4V5/4r/1vaQu6rkUxvym3o2JdXKO/5C7FB4X1UcoGvjpoZCI7nmgmcl34PbYlsO/J0HK8tRA==;EndpointSuffix=core.windows.net
         volumes:
             - /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector/images:/home/detector/workspace/images
             - /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector/annotations/:/home/detector/workspace/annotations
