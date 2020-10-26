@@ -12,7 +12,6 @@ class KafkaManager:
         self.consumer = KafkaConsumer(
             bootstrap_servers=conf.bootstrap_servers,
             group_id=conf.consumer.consumer_group_id,
-            value_deserializer=lambda x: json.loads(x.decode('utf-8'), object_hook=json_util.object_hook),
             consumer_timeout_ms=conf.consumer.consumer_timeout_ms,
             auto_offset_reset='smallest',
             enable_auto_commit=True,

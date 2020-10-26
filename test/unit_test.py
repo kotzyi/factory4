@@ -9,16 +9,18 @@ class TestStringMethods(unittest.TestCase):
 
     def test_produce_msg(self):
         msg = {}
-        msg['AZURE_SHARE_NAME'] = 'models'
-        msg['AZURE_IMAGE_DIR_PATH'] = 'test/images'
-        msg['AZURE_LABEL_DIR_PATH'] = 'test/annotations'
+        msg['FACTORY_ID'] = "233"
+        msg['LEARN_ID'] = "252"
+        msg['AZURE_SHARE_NAME'] = "learn-info"
+        msg['AZURE_IMAGE_DIR_PATH'] = "233/252/user"
+        msg['AZURE_LABEL_DIR_PATH'] = "233/252/annotations"
         json_msg = json.dumps(msg)
 
         self.producer = KafkaProducer(
             bootstrap_servers=KafkaConfig.object_detector.bootstrap_servers,
             value_serializer=lambda x: json.dumps(x, default=json_util.default).encode('utf-8'))
 
-        self.producer.send(topic='REQ_CVT_TF_MDL', value=json_msg)
+        self.producer.send(topic='REQ_CVT_TF_MDL', value=msg)
 
 
 if __name__ == '__main__':

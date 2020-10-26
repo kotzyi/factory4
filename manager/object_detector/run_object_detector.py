@@ -37,7 +37,7 @@ def main():
             logger.info(f"VALUES: {envs}")
 
             object_detector.run(envs)
-            # object_detect_kafka_manager.produce(envs)
+            object_detect_kafka_manager.produce(envs)
         else:
             time.sleep(kafka_conf.consumer.sleep)
 

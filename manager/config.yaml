@@ -22,7 +22,7 @@ kafka:
         bootstrap_servers: 52.141.56.0:9092
         producer:
             <<: *default_producer
-            topic: FIN_CRT_MDL
+            topic: RESP_CVT_TF_MDL
         consumer:
             <<: *default_consumer
             consumer_group_id: TF_CONVERTER

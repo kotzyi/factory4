@@ -8,7 +8,7 @@ class DockerManager:
 
     def run(self, envs):
         for key, value in envs.items():
-            self.conf.environment.append(key + "=" + value)
+            self.conf.environment.append(str(key) + "=" + str(value))
         self.client.containers.run(
             image=self.conf.image,
             command=self.conf.command,
