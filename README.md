@@ -1,2 +1,2 @@
 # factory4
-deep vision system for factory detect detection
+deep vision system for defect detection

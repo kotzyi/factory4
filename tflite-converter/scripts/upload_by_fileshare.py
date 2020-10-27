@@ -33,16 +33,13 @@ def upload_local_file(connection_string, local_file_path, share_name, dest_file_
 
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-l", "--local_dir_path", default="", type=str, help="local file path of model file")
-    parser.add_argument("-f", "--model_file_name", default="model.tflite", type=str, help="model file name")
-    args = parser.parse_args()
-
+    model_file_name = os.getenv('MODEL_FILE_NAME')
+    saved_model_dir = os.getenv('EXPORTED_MODEL_SAVED_PATH')
     connection_string = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
     share_name = os.getenv('AZURE_SHARE_NAME')
     dir_path = os.getenv('AZURE_MODEL_DIR_PATH')
-    local_file_path = os.path.join(args.local_dir_path, args.model_file_name)
-    dest_file_path = os.path.join(dir_path, args.model_file_name)
+    local_file_path = os.path.join(saved_model_dir, model_file_name)
+    dest_file_path = os.path.join(dir_path, model_file_name)
     upload_local_file(connection_string, local_file_path, share_name, dest_file_path)
 
 
