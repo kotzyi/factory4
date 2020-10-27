@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "EDIT PIPELINE CONFIGURATION"
+python /home/detector/scripts/edit_pipeline.py
+
 echo "DOWNLOAD IMAGES FROM FILESHARE"
 python /home/detector/scripts/download_from_fileshare.py
 

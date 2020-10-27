@@ -1,7 +1,7 @@
 version: '3'
 services:
         factory4:
-                container_name: object-detector
+                container_name: object_detector
                 image: kotzyi/factory4:0.1.0
                 command: /home/detector/entrypoint.sh
                 runtime: nvidia
@@ -17,9 +17,12 @@ services:
                         - "INPUT_TYPE=${INPUT_TYPE}"
                         - "TRAINED_CHECKPOINT_PATH=${TRAINED_CHECKPOINT_PATH}"
                         - "MODEL_OUTPUT_PATH=${MODEL_OUTPUT_PATH}"
+                        - "PRE_TRAINED_MODEL_PATH=${PRE_TRAINED_MODEL_PATH}"
+                        - "AZURE_STORAGE_CONNECTION_STRING=${AZURE_STORAGE_CONNECTION_STRING}"
+                        - "MODEL_NAME=${MODEL_NAME}"
                 volumes:
-                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector/images:/home/detector/workspace/images
-                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector/annotations/:/home/detector/workspace/annotations
-                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector/models:/home/detector/workspace/models
-                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector/entrypoint.sh:/home/detector/entrypoint.sh
-                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector/scripts:/home/detector/scripts
+                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/images:/home/detector/workspace/images
+                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/annotations/:/home/detector/workspace/annotations
+                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/models:/home/detector/workspace/models
+                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/entrypoint.sh:/home/detector/entrypoint.sh
+                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/scripts:/home/detector/scripts

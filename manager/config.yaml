@@ -8,6 +8,10 @@ kafka:
                 - AZURE_SHARE_NAME
                 - AZURE_IMAGE_DIR_PATH
                 - AZURE_LABEL_DIR_PATH
+                - MODEL_NUM_CLASS
+                - MODEL_BATCH_SIZE
+                - MODEL_NUM_STEP
+                - MODEL_NUM_BOXES
         consumer: &default_consumer
             consumer_group_id: OBJECT_DETECTOR
             topic: REQ_CVT_TF_MDL
@@ -30,7 +34,7 @@ kafka:
 
 docker:
     object_detector:
-        build_context: /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector
+        build_context: /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector
         image: kotzyi/factory4:0.1.0
         command: /home/detector/entrypoint.sh
         runtime: nvidia
@@ -48,12 +52,14 @@ docker:
             - MODEL_OUTPUT_PATH=/home/detector/workspace/models/exported-models
             - TRAINED_CHECKPOINT_PATH=/home/detector/workspace/models/trained-models
             - AZURE_STORAGE_CONNECTION_STRING=
+            - MODEL_NAME=
+            - PRE_TRAINED_MODEL_PATH=/home/detector/workspace/models/pre-trained-models
         volumes:
-            - /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector/images:/home/detector/workspace/images
-            - /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector/annotations/:/home/detector/workspace/annotations
-            - /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector/models:/home/detector/workspace/models
-            - /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector/entrypoint.sh:/home/detector/entrypoint.sh
-            - /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector/scripts:/home/detector/scripts
+            - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/images:/home/detector/workspace/images
+            - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/annotations/:/home/detector/workspace/annotations
+            - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/models:/home/detector/workspace/models
+            - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/entrypoint.sh:/home/detector/entrypoint.sh
+            - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/scripts:/home/detector/scripts
     tflite_converter:
         build_context: /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite_converter
         image: tflite-converter_factory4:latest
@@ -64,6 +70,6 @@ docker:
             - MODEL_FILE_NAME=model.tflite
             - AZURE_STORAGE_CONNECTION_STRING=
         volumes:
-            - /datadrive/jlee/projects/github.com/kotzyi/factory4/object-detector/models/exported-models:/home/tflite-converter/exported-models
+            - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/models/exported-models:/home/tflite-converter/exported-models
             - /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite-converter/entrypoint.sh:/home/tflite-converter/entrypoint.sh
             - /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite-converter/scripts:/home/tflite-converter/scripts

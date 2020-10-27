@@ -11,4 +11,7 @@ MODEL_PIPELINE_CONFIG_PATH=/home/detector/workspace/models/trained-models/pipeli
 INPUT_TYPE=image_tensor \
 MODEL_OUTPUT_PATH=/home/detector/workspace/models/exported-models \
 TRAINED_CHECKPOINT_PATH=/home/detector/workspace/models/trained-models \
+PRE_TRAINED_MODEL_PATH=/home/detector/workspace/models/pre-trained-models \
+AZURE_STORAGE_CONNECTION_STRING= \
+MODEL_NAME=efficientdet_d0_coco17_tpu-32 \
 docker-compose up --build

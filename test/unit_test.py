@@ -5,7 +5,7 @@ from kafka import KafkaProducer
 from bson import json_util
 
 
-class TestStringMethods(unittest.TestCase):
+class TestModelGeneration(unittest.TestCase):
 
     def test_produce_msg(self):
         msg = {}
