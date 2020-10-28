@@ -63,14 +63,14 @@ docker:
             - /datadrive/jlee/projects/github.com/kotzyi/factory4/model_trainer/scripts:/home/detector/scripts
     tflite_converter:
         build_context: /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite_converter
-        image: kotzyi/tflite-converter:0.1.0
-        command: /home/tflite-converter/entrypoint.sh
+        image: kotzyi/tflite_converter:0.1.0
+        command: /home/tflite_converter/entrypoint.sh
         runtime: nvidia
         environment:
-            - EXPORTED_MODEL_SAVED_PATH=/home/tflite-converter/exported-models/saved_model
+            - EXPORTED_MODEL_SAVED_PATH=/home/tflite_converter/exported-models/saved_model
             - MODEL_FILE_NAME=model.tflite
             - AZURE_STORAGE_CONNECTION_STRING=
         volumes:
-            - /datadrive/jlee/projects/github.com/kotzyi/factory4/model_trainer/models/exported-models:/home/tflite-converter/exported-models
-            - /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite-converter/entrypoint.sh:/home/tflite-converter/entrypoint.sh
-            - /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite-converter/scripts:/home/tflite-converter/scripts
+            - /datadrive/jlee/projects/github.com/kotzyi/factory4/model_trainer/models/exported-models:/home/tflite_converter/exported-models
+            - /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite_converter/entrypoint.sh:/home/tflite_converter/entrypoint.sh
+            - /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite_converter/scripts:/home/tflite_converter/scripts
