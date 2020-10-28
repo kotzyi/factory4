@@ -2,9 +2,7 @@ version: '3'
 services:
         factory4:
                 container_name: tflite-converter
-                build:
-                        context: ./
-                        dockerfile: Dockerfile
+                image: kotzyi/tflite-converter:0.1.0
                 command: /home/tflite-converter/entrypoint.sh
                 runtime: nvidia
                 environment:
