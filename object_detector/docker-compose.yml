@@ -23,6 +23,6 @@ services:
                 volumes:
                         - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/images:/home/detector/workspace/images
                         - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/annotations/:/home/detector/workspace/annotations
-                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/models:/home/detector/workspace/models
+                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/models/pre-trained-models:/home/detector/workspace/models/pre-trained-models
                         - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/entrypoint.sh:/home/detector/entrypoint.sh
                         - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/scripts:/home/detector/scripts
