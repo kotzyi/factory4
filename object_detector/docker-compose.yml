@@ -2,7 +2,7 @@ version: '3'
 services:
         factory4:
                 container_name: object_detector
-                image: kotzyi/factory4:0.1.1
+                image: kotzyi/model-trainer:0.1.1
                 command: /home/detector/entrypoint.sh
                 runtime: nvidia
                 environment:
@@ -29,5 +29,6 @@ services:
                         - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/images:/home/detector/workspace/images
                         - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/annotations/:/home/detector/workspace/annotations
                         - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/models/pre-trained-models:/home/detector/workspace/models/pre-trained-models
+                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/models/exported-models:/home/detector/workspace/models/exported-models
                         - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/entrypoint.sh:/home/detector/entrypoint.sh
                         - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/scripts:/home/detector/scripts
