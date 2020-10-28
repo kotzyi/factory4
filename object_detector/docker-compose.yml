@@ -6,6 +6,7 @@ services:
                 command: /home/detector/entrypoint.sh
                 runtime: nvidia
                 environment:
+                        - "IMAGE_LABEL_DIR=${IMAGE_LABEL_DIR}"
                         - "TRAIN_IMAGE_PATH=${TRAIN_IMAGE_PATH}"
                         - "TRAIN_IMAGE_LABEL_PATH=${TRAIN_IMAGE_LABEL_PATH}"
                         - "TRAIN_IMAGE_TFRECORD_PATH=${TRAIN_IMAGE_TFRECORD_PATH}"
@@ -20,6 +21,10 @@ services:
                         - "PRE_TRAINED_MODEL_PATH=${PRE_TRAINED_MODEL_PATH}"
                         - "AZURE_STORAGE_CONNECTION_STRING=${AZURE_STORAGE_CONNECTION_STRING}"
                         - "MODEL_NAME=${MODEL_NAME}"
+                        - "AZURE_SHARE_NAME=${AZURE_SHARE_NAME}"
+                        - "AZURE_IMAGE_DIR_PATH=${AZURE_IMAGE_DIR_PATH}"
+                        - "AZURE_LABEL_DIR_PATH=${AZURE_LABEL_DIR_PATH}"
+                        - "AZURE_MODEL_DIR_PATH=${AZURE_MODEL_DIR_PATH}"
                 volumes:
                         - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/images:/home/detector/workspace/images
                         - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/annotations/:/home/detector/workspace/annotations
