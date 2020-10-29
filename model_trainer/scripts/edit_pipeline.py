@@ -27,7 +27,7 @@ def main():
     pipeline_config.model.ssd.image_resizer.keep_aspect_ratio_resizer.min_dimension = 640
     pipeline_config.model.ssd.image_resizer.keep_aspect_ratio_resizer.max_dimension = 640
     pipeline_config.train_config.data_augmentation_options[0].random_scale_crop_and_pad_to_square.output_size = 640
-    pipeline_config.train_config.batch_size = 128
+    pipeline_config.train_config.batch_size = 8
     pipeline_config.train_config.num_steps = 10000
     pipeline_config.train_config.replicas_to_aggregate = 16
     pipeline_config.train_config.max_number_of_boxes = 10
