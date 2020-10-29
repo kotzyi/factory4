@@ -3,6 +3,11 @@
 echo "EDIT PIPELINE CONFIGURATION"
 python /home/detector/scripts/edit_pipeline.py
 
+echo "CLEAR EX-TRAINED-MODEL AND IMAGES"
+rm -rf $MODEL_OUTPUT_PATH/*
+rm -rf $IMAGE_LABEL_DIR/*
+rm -rf $TRAIN_IMAGE_PATH/*
+
 echo "DOWNLOAD IMAGES FROM FILESHARE"
 python /home/detector/scripts/download_from_fileshare.py
 
@@ -14,9 +19,6 @@ python /home/detector/scripts/generate_tfrecord.py -x $TEST_IMAGE_PATH -l $TEST_
 
 echo "TRAIN A MODEL"
 python /home/detector/models/research/object_detection/model_main_tf2.py --model_dir=$MODEL_PATH --pipeline_config_path=$MODEL_PIPELINE_CONFIG_PATH
-
-echo "CLEAR EX-TRAINED-MODEL"
-rm $MODEL_OUTPUT_PATH/*
 
 echo "EXPORTING"
 python /home/detector/models/research/object_detection/exporter_main_v2.py --input_type=$INPUT_TYPE --pipeline_config_path=$MODEL_PIPELINE_CONFIG_PATH --trained_checkpoint_dir=$TRAINED_CHECKPOINT_PATH --output_directory=$MODEL_OUTPUT_PATH
