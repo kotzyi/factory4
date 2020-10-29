@@ -24,6 +24,9 @@ def main():
     pipeline_config.train_input_reader.label_map_path = os.getenv('TRAIN_IMAGE_LABEL_PATH')
     pipeline_config.train_input_reader.tf_record_input_reader.input_path[0] = os.getenv('TRAIN_IMAGE_TFRECORD_PATH')
 
+    pipeline_config.model.ssd.num_classes = 1
+    pipeline_config.model.ssd.image_resizer.keep_aspect_ratio_resizer.min_dimension = 320
+    pipeline_config.model.ssd.image_resizer.keep_aspect_ratio_resizer.max_dimension = 320
     pipeline_config.train_config.batch_size = 8
     pipeline_config.train_config.num_steps = 1000
     pipeline_config.train_config.max_number_of_boxes = 10
