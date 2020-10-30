@@ -13,10 +13,10 @@ INPUT_TYPE=image_tensor \
 MODEL_OUTPUT_PATH=/home/detector/workspace/models/exported-models \
 TRAINED_CHECKPOINT_PATH=/home/detector/workspace/models/trained-models \
 PRE_TRAINED_MODEL_PATH=/home/detector/workspace/models/pre-trained-models \
-AZURE_STORAGE_CONNECTION_STRING= \
+AZURE_STORAGE_CONNECTION_STRING="" \
 MODEL_NAME=efficientdet_d0_coco17_tpu-32 \
-AZURE_SHARE_NAME=learn-info \
-AZURE_IMAGE_DIR_PATH=233/252/user \
-AZURE_LABEL_DIR_PATH=233/252/annotations \
-AZURE_MODEL_DIR_PATH=233/252/model \
+AZURE_SHARE_NAME=models \
+AZURE_IMAGE_DIR_PATH=scratch/images \
+AZURE_LABEL_DIR_PATH=scratch/annotations \
+AZURE_MODEL_DIR_PATH=scratch/models \
 docker-compose up --build
