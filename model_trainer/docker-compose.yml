@@ -6,6 +6,7 @@ services:
                 command: /home/detector/entrypoint.sh
                 runtime: nvidia
                 environment:
+                        - "IMAGE_PATH=${IMAGE_PATH}"
                         - "IMAGE_LABEL_DIR=${IMAGE_LABEL_DIR}"
                         - "TRAIN_IMAGE_PATH=${TRAIN_IMAGE_PATH}"
                         - "TRAIN_IMAGE_LABEL_PATH=${TRAIN_IMAGE_LABEL_PATH}"
@@ -13,6 +14,7 @@ services:
                         - "TEST_IMAGE_PATH=${TEST_IMAGE_PATH}"
                         - "TEST_IMAGE_LABEL_PATH=${TEST_IMAGE_LABEL_PATH}"
                         - "TEST_IMAGE_TFRECORD_PATH=${TEST_IMAGE_TFRECORD_PATH}"
+                        - "TEST_IMAGE_RATIO=${TEST_IMAGE_RATIO}"
                         - "MODEL_PATH=${MODEL_PATH}"
                         - "MODEL_PIPELINE_CONFIG_PATH=${MODEL_PIPELINE_CONFIG_PATH}"
                         - "INPUT_TYPE=${INPUT_TYPE}"

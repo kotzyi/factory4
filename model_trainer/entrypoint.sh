@@ -12,6 +12,9 @@ python /home/detector/scripts/edit_pipeline.py
 echo "DOWNLOAD IMAGES FROM FILESHARE"
 python /home/detector/scripts/download_from_fileshare.py
 
+echo "DEVIDE IMAGES INTO TRAIN AND TEST"
+python /home/detector/scripts/partition_dataset.py -i $IMAGE_PATH -r $TEST_IMAGE_RATIO
+
 echo "CREATE TRAIN TFRECORD"
 python /home/detector/scripts/generate_tfrecord.py -x $TRAIN_IMAGE_PATH -l $TRAIN_IMAGE_LABEL_PATH -o $TRAIN_IMAGE_TFRECORD_PATH
 
