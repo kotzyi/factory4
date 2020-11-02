@@ -16,7 +16,7 @@ PRE_TRAINED_MODEL_PATH=/home/detector/workspace/models/pre-trained-models \
 AZURE_STORAGE_CONNECTION_STRING="" \
 MODEL_NAME=efficientdet_d0_coco17_tpu-32 \
 AZURE_SHARE_NAME=models \
-AZURE_IMAGE_DIR_PATH=scratch/images \
-AZURE_LABEL_DIR_PATH=scratch/annotations \
-AZURE_MODEL_DIR_PATH=scratch/models \
+AZURE_IMAGE_DIR_PATH=detach/images \
+AZURE_LABEL_DIR_PATH=detach/annotations \
+AZURE_MODEL_DIR_PATH=detach/models \
 docker-compose up --build

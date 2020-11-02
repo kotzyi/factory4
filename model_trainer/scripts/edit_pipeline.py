@@ -37,8 +37,8 @@ def main():
     optimizer_config.total_steps = 10000
     optimizer_config.warmup_steps = 1000
 
-    pipeline_config.eval_input_reader.label_map_path = os.getenv('TEST_IMAGE_LABEL_PATH')
-    pipeline_config.eval_input_reader.tf_record_input_reader.input_path[0] = os.getenv('TEST_IMAGE_TFRECORD_PATH')
+    # pipeline_config.eval_input_reader.label_map_path = os.getenv('TEST_IMAGE_LABEL_PATH')
+    # pipeline_config.eval_input_reader.tf_record_input_reader.input_path[0] = os.getenv('TEST_IMAGE_TFRECORD_PATH')
 
     config_text = text_format.MessageToString(pipeline_config)
     print(config_text)

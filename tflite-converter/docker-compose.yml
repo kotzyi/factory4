@@ -7,7 +7,8 @@ services:
                 runtime: nvidia
                 environment:
                         - "EXPORTED_MODEL_SAVED_PATH=${EXPORTED_MODEL_SAVED_PATH}"
-                        - "AZURE_STORAGE_CONNECTION_STRING="
+                        - "MODEL_FILE_NAME=${MODEL_FILE_NAME}"
+                        - "AZURE_STORAGE_CONNECTION_STRING=${AZURE_STORAGE_CONNECTION_STRING}"
                 volumes:
                         - /datadrive/jlee/projects/github.com/kotzyi/factory4/model_trainer/models/exported-models:/home/tflite-converter/exported-models
                         - /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite-converter/entrypoint.sh:/home/tflite-converter/entrypoint.sh
