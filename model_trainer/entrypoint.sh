@@ -1,12 +1,13 @@
 #!/bin/bash
 
-echo "EDIT PIPELINE CONFIGURATION"
-python /home/detector/scripts/edit_pipeline.py
-
 echo "CLEAR EX-TRAINED-MODEL AND IMAGES"
 rm -rf $MODEL_OUTPUT_PATH/*
 rm -rf $IMAGE_LABEL_DIR/*
 rm -rf $TRAIN_IMAGE_PATH/*
+rm -rf $MODEL_PATH/*
+
+echo "EDIT PIPELINE CONFIGURATION"
+python /home/detector/scripts/edit_pipeline.py
 
 echo "DOWNLOAD IMAGES FROM FILESHARE"
 python /home/detector/scripts/download_from_fileshare.py
