@@ -55,7 +55,7 @@ def download_azure_file(connection_string, share_name, source_file_path, local_d
 
 
 def main():
-    local_image_path = os.getenv('TRAIN_IMAGE_PATH')
+    local_image_path = os.getenv('IMAGE_PATH')
     local_image_label_path = os.getenv('IMAGE_LABEL_DIR')
     connection_string = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
     share_name = os.getenv('AZURE_SHARE_NAME')

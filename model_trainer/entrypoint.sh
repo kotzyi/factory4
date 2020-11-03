@@ -4,6 +4,7 @@ echo "CLEAR EX-TRAINED-MODEL AND IMAGES"
 rm -rf $MODEL_OUTPUT_PATH/*
 rm -rf $IMAGE_LABEL_DIR/*
 rm -rf $TRAIN_IMAGE_PATH/*
+rm -rf $TEST_IMAGE_PATH/*
 rm -rf $MODEL_PATH/*
 
 echo "EDIT PIPELINE CONFIGURATION"
@@ -13,7 +14,7 @@ echo "DOWNLOAD IMAGES FROM FILESHARE"
 python /home/detector/scripts/download_from_fileshare.py
 
 echo "DEVIDE IMAGES INTO TRAIN AND TEST"
-python /home/detector/scripts/partition_dataset.py -i $IMAGE_PATH -r $TEST_IMAGE_RATIO
+python /home/detector/scripts/partition_dataset.py -x -i $IMAGE_PATH -r $TEST_IMAGE_RATIO
 
 echo "CREATE TRAIN TFRECORD"
 python /home/detector/scripts/generate_tfrecord.py -x $TRAIN_IMAGE_PATH -l $TRAIN_IMAGE_LABEL_PATH -o $TRAIN_IMAGE_TFRECORD_PATH

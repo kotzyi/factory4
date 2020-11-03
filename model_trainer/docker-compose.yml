@@ -34,3 +34,5 @@ services:
                         - /datadrive/jlee/projects/github.com/kotzyi/factory4/model_trainer/models/exported-models:/home/detector/workspace/models/exported-models
                         - /datadrive/jlee/projects/github.com/kotzyi/factory4/model_trainer/entrypoint.sh:/home/detector/entrypoint.sh
                         - /datadrive/jlee/projects/github.com/kotzyi/factory4/model_trainer/scripts:/home/detector/scripts
+                ports:
+                        - "60066:60066"
