@@ -24,6 +24,9 @@ echo "CREATE TEST TFRECORD"
 python /home/detector/scripts/generate_tfrecord.py -x $TEST_IMAGE_PATH -l $TEST_IMAGE_LABEL_PATH -o $TEST_IMAGE_TFRECORD_PATH
 
 echo "TRAIN A MODEL"
+python /home/detector/models/research/object_detection/model_main_tf2.py --model_dir=$MODEL_PATH --pipeline_config_path=$MODEL_PIPELINE_CONFIG_PATH
+
+echo "EVALUATE A MODEL"
 python /home/detector/models/research/object_detection/model_main_tf2.py --model_dir=$MODEL_PATH --pipeline_config_path=$MODEL_PIPELINE_CONFIG_PATH --checkpoint_dir=$MODEL_PATH
 
 echo "EXPORTING"
