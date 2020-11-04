@@ -29,13 +29,13 @@ def main():
     pipeline_config.train_config.fine_tune_checkpoint_type = "detection"
     # pipeline_config.train_config.data_augmentation_options[0].random_scale_crop_and_pad_to_square.output_size = 640
     pipeline_config.train_config.batch_size = 8
-    pipeline_config.train_config.num_steps = 10000
+    pipeline_config.train_config.num_steps = 3000
     pipeline_config.train_config.replicas_to_aggregate = 8
     pipeline_config.train_config.max_number_of_boxes = 100
     pipeline_config.train_config.use_bfloat16 = False
 
     optimizer_config = pipeline_config.train_config.optimizer.momentum_optimizer.learning_rate.cosine_decay_learning_rate
-    optimizer_config.total_steps = 10000
+    optimizer_config.total_steps = 3000
     optimizer_config.warmup_steps = 100
 
     pipeline_config.eval_input_reader[0].label_map_path = os.getenv('TEST_IMAGE_LABEL_PATH')

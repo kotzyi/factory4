@@ -12,6 +12,6 @@ services:
                         - "AZURE_MODEL_DIR_PATH=${AZURE_MODEL_DIR_PATH}"
                         - "AZURE_STORAGE_CONNECTION_STRING=${AZURE_STORAGE_CONNECTION_STRING}"
                 volumes:
-                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite-converter/block-models-backup:/home/tflite-converter/exported-models
+                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/model_trainer/models/exported-models:/home/tflite-converter/exported-models
                         - /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite-converter/entrypoint.sh:/home/tflite-converter/entrypoint.sh
                         - /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite-converter/scripts:/home/tflite-converter/scripts
