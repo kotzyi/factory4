@@ -7,9 +7,9 @@ optional arguments:
   -i IMAGEDIR, --imageDir IMAGEDIR
                         Path to the folder where the image dataset is stored. If not specified, the CWD will be used.
   -o OUTPUTDIR, --outputDir OUTPUTDIR
-                        Path to the output folder where the train and test dirs should be created. Defaults to the same directory as IMAGEDIR.
+                        Path to the output folder where the train and tester dirs should be created. Defaults to the same directory as IMAGEDIR.
   -r RATIO, --ratio RATIO
-                        The ratio of the number of test images over the total number of images. The default is 0.1.
+                        The ratio of the number of tester images over the total number of images. The default is 0.1.
   -x, --xml             Set this flag if you want the xml annotation files to be processed and copied over.
 """
 import os
@@ -24,7 +24,7 @@ def iterate_dir(source, dest, ratio, copy_xml):
     source = source.replace('\\', '/')
     dest = dest.replace('\\', '/')
     train_dir = os.path.join(dest, 'train')
-    test_dir = os.path.join(dest, 'test')
+    test_dir = os.path.join(dest, 'tester')
 
     if not os.path.exists(train_dir):
         os.makedirs(train_dir)
@@ -70,14 +70,14 @@ def main():
     )
     parser.add_argument(
         '-o', '--outputDir',
-        help='Path to the output folder where the train and test dirs should be created. '
+        help='Path to the output folder where the train and tester dirs should be created. '
              'Defaults to the same directory as IMAGEDIR.',
         type=str,
         default=None
     )
     parser.add_argument(
         '-r', '--ratio',
-        help='The ratio of the number of test images over the total number of images. The default is 0.1.',
+        help='The ratio of the number of tester images over the total number of images. The default is 0.1.',
         default=0.1,
         type=float)
     parser.add_argument(
