@@ -39,6 +39,16 @@ docker:
         command: /home/detector/entrypoint.sh
         runtime: nvidia
         environment:
+            - NUM_CLASS=2
+            - IMAGE_SIZE=384
+            - BATCH_SIZE=16
+            - TOTAL_STEP=10000
+            - NUM_BOXES=10
+            - REPLICAS_TO_AGGREGATE=8
+            - MODEL_TYPE=detection
+            - WARMUP_STEP=100
+            - CLASSIFICATION_WEIGHT=1.0
+            - LOCALIZATION_WEIGHT=1.0
             - IMAGE_LABEL_DIR=/home/detector/workspace/annotations/
             - IMAEG_PATH=/home/detector/workspace/images
             - TRAIN_IMAGE_PATH=/home/detector/workspace/images/train

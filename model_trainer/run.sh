@@ -1,5 +1,13 @@
 #!/bin/bash
 
+NUM_CLASS=2 \
+IMAGE_SIZE=512 \
+BATCH_SIZE=16 \
+TOTAL_STEP=10000 \
+NUM_BOXES=10 \
+REPLICAS_TO_AGGREGATE=8 \
+MODEL_TYPE=detection \
+WARMUP_STEP=100 \
 IMAGE_PATH=/home/detector/workspace/images \
 IMAGE_LABEL_DIR=/home/detector/workspace/annotations/ \
 TRAIN_IMAGE_PATH=/home/detector/workspace/images/train \

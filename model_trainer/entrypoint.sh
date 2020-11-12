@@ -26,8 +26,8 @@ python /home/detector/scripts/generate_tfrecord.py -x $TEST_IMAGE_PATH -l $TEST_
 echo "TRAIN A MODEL"
 python /home/detector/models/research/object_detection/model_main_tf2.py --model_dir=$MODEL_PATH --pipeline_config_path=$MODEL_PIPELINE_CONFIG_PATH
 
-echo "EVALUATE A MODEL"
-python /home/detector/models/research/object_detection/model_main_tf2.py --model_dir=$MODEL_PATH --pipeline_config_path=$MODEL_PIPELINE_CONFIG_PATH --checkpoint_dir=$MODEL_PATH
-
 echo "EXPORTING"
 python /home/detector/models/research/object_detection/exporter_main_v2.py --input_type=$INPUT_TYPE --pipeline_config_path=$MODEL_PIPELINE_CONFIG_PATH --trained_checkpoint_dir=$TRAINED_CHECKPOINT_PATH --output_directory=$MODEL_OUTPUT_PATH
+
+#echo "EVALUATE A MODEL"
+#python /home/detector/models/research/object_detection/model_main_tf2.py --model_dir=$MODEL_PATH --pipeline_config_path=$MODEL_PIPELINE_CONFIG_PATH --checkpoint_dir=$MODEL_PATH
