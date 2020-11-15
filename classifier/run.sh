@@ -1,7 +1,10 @@
 #!/bin/bash
+IMAGE_DIR_PATH=/datadrive/jlee/images \
+MODEL_NAME=efficientnetb0 \
+BATCH_SIZE=16 \
+NUM_CLASSES=2 \
 AZURE_SHARE_NAME=models \
 AZURE_MODEL_DIR_PATH=detach/models \
-MODEL_FILE_NAME=block_model_6.tflite \
 AZURE_STORAGE_CONNECTION_STRING="" \
-EXPORTED_MODEL_SAVED_PATH=/home/tflite-converter/exported-models/saved_model \
+
 docker-compose up --build

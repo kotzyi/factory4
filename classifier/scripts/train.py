@@ -1,7 +1,7 @@
 import os
 import tensorflow as tf
 from classifier.datasets import Dataset
-from classifier.model import Classifier
+from classifier.classifier import Classifier
 
 
 def main():
