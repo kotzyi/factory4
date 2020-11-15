@@ -1,0 +1,19 @@
+version: '3'
+services:
+        factory4:
+                container_name: classifier
+                image: kotzyi/classidfier:latest
+                command: /home/classifier/entrypoint.sh
+                runtime: nvidia
+                environment:
+                        - "IMAGE_DIR_PATH=${IMAGE_DIR_PATH}"
+                        - "MODEL_NAME=${MODEL_NAME}"
+                        - "BATCH_SIZE=${BATCH_SIZE}"
+                        - "NUM_CLASSES=${NUM_CLASSES}"
+                        - "AZURE_SHARE_NAME=${AZURE_SHARE_NAME}"
+                        - "AZURE_MODEL_DIR_PATH=${AZURE_MODEL_DIR_PATH}"
+                        - "AZURE_STORAGE_CONNECTION_STRING=${AZURE_STORAGE_CONNECTION_STRING}"
+                volumes:
+                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/models/exported-models:/home/tflite-converter/exported-models
+                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite-converter/entrypoint.sh:/home/tflite-converter/entrypoint.sh
+                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite-converter/scripts:/home/tflite-converter/scripts
