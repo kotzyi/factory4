@@ -29,7 +29,9 @@ def main():
     with strategy.scope():
         model = classifier.build_model()
 
-    epochs = 25  # @param {type: "slider", min:8, max:80}
+    classifier.unfreeze_model(model)
+
+    epochs = 10  # @param {type: "slider", min:8, max:50}
     hist = model.fit(train_dataset, epochs=epochs, validation_data=val_dataset, verbose=2)
 
 

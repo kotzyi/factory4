@@ -24,6 +24,7 @@ class Dataset:
             subset="validation",
             label_mode='categorical',
             seed=1337,
+            shuffle=False,
             image_size=self.image_size,
             batch_size=self.batch_size,
         )
