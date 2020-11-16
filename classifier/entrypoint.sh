@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "UPDATE EFFICIENT NET LATEST WEIGHT"
+echo "UPDATE EFFICIENT-NET LATEST WEIGHT"
 python /home/classifier/efficient_weight_update.py \
   --model b1 \
   --notop \

@@ -1,4 +1,5 @@
 #!/bin/bash
+MODEL_SAVE_PATH=/home/classifier/models/exported-models/ \
 PRE_TRAINED_MODEL_PATH=/home/classifier/models/pre-trained-models/ \
 IMAGE_DIR_PATH=/home/classifier/images \
 MODEL_NAME=efficientnet-b1 \

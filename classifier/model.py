@@ -26,7 +26,6 @@ class Classifier:
         self.base_model, self.image_size = base_model[model_name]
         self.num_classes = num_classes
         self.weight_path = os.path.join(pre_trained_model_path, self.model_name+".h5")
-        print("!!!!: ", self.weight_path)
         self.img_augmentation = Sequential(
             [
                 preprocessing.RandomRotation(factor=0.15),

@@ -20,6 +20,7 @@ def main():
     image_dir = os.getenv("IMAGE_DIR_PATH")
     model_name = os.getenv("MODEL_NAME")
     pre_trained_model_path = os.getenv("PRE_TRAINED_MODEL_PATH")
+    model_save_path = os.getenv("MODEL_SAVE_PATH")
 
     classifier = Classifier(model_name, num_classes, pre_trained_model_path)
     image_size = classifier.image_size
@@ -35,6 +36,7 @@ def main():
     epochs = 10  # @param {type: "slider", min:8, max:50}
     hist = model.fit(train_dataset, epochs=epochs, validation_data=val_dataset, verbose=2)
 
+    model.save(model_save_path)
 
 if __name__ == "__main__":
     main()
