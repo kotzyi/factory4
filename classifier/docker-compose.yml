@@ -2,7 +2,7 @@ version: '3'
 services:
         factory4:
                 container_name: classifier
-                image: tensorflow/tensorflow:2.3.0-gpu
+                image: kotzyi/classifier:0.0.2
                 command: /home/classifier/entrypoint.sh
                 runtime: nvidia
                 environment:
@@ -14,4 +14,6 @@ services:
                         - "AZURE_MODEL_DIR_PATH=${AZURE_MODEL_DIR_PATH}"
                         - "AZURE_STORAGE_CONNECTION_STRING=${AZURE_STORAGE_CONNECTION_STRING}"
                 volumes:
-                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/classifier:/home/classifier
+                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/classifier/:/home/classifier/
+                        - /datadrive/jlee/images:/home/classifier/images
+                working_dir: /home/classifier/

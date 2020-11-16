@@ -1,7 +1,7 @@
 import os
 import tensorflow as tf
-from classifier.datasets import Dataset
-from classifier.classifier import Classifier
+from datasets import Dataset
+from model import Classifier
 
 
 def main():
@@ -15,14 +15,16 @@ def main():
         print("Not connected to a TPU runtime. Using CPU/GPU strategy")
         strategy = tf.distribute.MirroredStrategy()
 
-    batch_size = os.getenv("BATCH_SIZE")
-    num_classes = os.getenv("NUM_CLASSES")
+    batch_size = int(os.getenv("BATCH_SIZE"))
+    num_classes = int(os.getenv("NUM_CLASSES"))
     image_dir = os.getenv("IMAGE_DIR_PATH")
     model_name = os.getenv("MODEL_NAME")
 
     classifier = Classifier(model_name, num_classes)
     image_size = classifier.image_size
-    train_dataset, val_dataset = Dataset(batch_size, image_size, num_classes, image_dir)
+
+    dataset = Dataset(batch_size, image_size, num_classes, image_dir)
+    train_dataset, val_dataset = dataset.build_dataset()
 
     with strategy.scope():
         model = classifier.build_model()

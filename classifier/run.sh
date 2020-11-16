@@ -1,8 +1,7 @@
 #!/bin/bash
-PYTHONPATH=/home/classifier/ \
 IMAGE_DIR_PATH=/home/classifier/images \
 MODEL_NAME=efficientnetb0 \
-BATCH_SIZE=16 \
+BATCH_SIZE=32 \
 NUM_CLASSES=2 \
 AZURE_SHARE_NAME=models \
 AZURE_MODEL_DIR_PATH=detach/models \
