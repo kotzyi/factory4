@@ -6,6 +6,7 @@ services:
                 command: /home/classifier/entrypoint.sh
                 runtime: nvidia
                 environment:
+                        - "PRE_TRAINED_MODEL_PATH=${PRE_TRAINED_MODEL_PATH}"
                         - "IMAGE_DIR_PATH=${IMAGE_DIR_PATH}"
                         - "MODEL_NAME=${MODEL_NAME}"
                         - "BATCH_SIZE=${BATCH_SIZE}"

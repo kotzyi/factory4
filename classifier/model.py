@@ -1,3 +1,4 @@
+import os
 import tensorflow as tf
 from tensorflow.keras.applications import (
     EfficientNetB0,
@@ -11,19 +12,21 @@ from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
 
 base_model = {
-    'efficientnetb0': (EfficientNetB0, 224),
-    'efficientnetb1': (EfficientNetB1, 240),
-    'efficientnetb2': (EfficientNetB2, 260),
-    'efficientnetb3': (EfficientNetB3, 300),
-    'efficientnetb4': (EfficientNetB4, 380),
+    'efficientnet-b0': (EfficientNetB0, 224),
+    'efficientnet-b1': (EfficientNetB1, 240),
+    'efficientnet-b2': (EfficientNetB2, 260),
+    'efficientnet-b3': (EfficientNetB3, 300),
+    'efficientnet-b4': (EfficientNetB4, 380),
 }
 
 
 class Classifier:
-    def __init__(self, model_name, num_classes):
+    def __init__(self, model_name, num_classes, pre_trained_model_path):
         self.model_name = model_name
         self.base_model, self.image_size = base_model[model_name]
         self.num_classes = num_classes
+        self.weight_path = os.path.join(pre_trained_model_path, self.model_name+".h5")
+        print("!!!!: ", self.weight_path)
         self.img_augmentation = Sequential(
             [
                 preprocessing.RandomRotation(factor=0.15),
@@ -37,7 +40,7 @@ class Classifier:
     def build_model(self):
         inputs = layers.Input(shape=(self.image_size, self.image_size, 3))
         x = self.img_augmentation(inputs)
-        model = self.base_model(include_top=False, input_tensor=x, weights="imagenet")
+        model = self.base_model(include_top=False, input_tensor=x, weights=self.weight_path)
 
         # Freeze the pretrained weights
         model.trainable = False

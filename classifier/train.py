@@ -19,8 +19,9 @@ def main():
     num_classes = int(os.getenv("NUM_CLASSES"))
     image_dir = os.getenv("IMAGE_DIR_PATH")
     model_name = os.getenv("MODEL_NAME")
+    pre_trained_model_path = os.getenv("PRE_TRAINED_MODEL_PATH")
 
-    classifier = Classifier(model_name, num_classes)
+    classifier = Classifier(model_name, num_classes, pre_trained_model_path)
     image_size = classifier.image_size
 
     dataset = Dataset(batch_size, image_size, num_classes, image_dir)
