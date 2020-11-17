@@ -1,9 +1,10 @@
 #!/bin/bash
+LEARNING_RATE=1e-2 \
 EPOCHS=20 \
 MODEL_SAVE_PATH=/home/classifier/models/exported-models \
-PRE_TRAINED_MODEL_PATH=/home/classifier/models/pre-trained-models/ \
+PRE_TRAINED_MODEL_PATH=/home/classifier/models/pre-trained-models \
 IMAGE_DIR_PATH=/home/classifier/images \
-MODEL_NAME=efficientnet-b7 \
+MODEL_NAME=efficientnet-b0 \
 BATCH_SIZE=64 \
 NUM_CLASSES=2 \
 AZURE_SHARE_NAME=models \

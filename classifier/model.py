@@ -1,4 +1,5 @@
 import os
+import math
 import tensorflow as tf
 from tensorflow.keras.applications import (
     EfficientNetB0,
@@ -27,10 +28,10 @@ base_model = {
 
 
 class Classifier:
-    def __init__(self, model_name, num_classes, pre_trained_model_path):
+    def __init__(self, model_name, learning_rate, pre_trained_model_path):
         self.model_name = model_name
+        self.lr = float(learning_rate)
         self.base_model, self.image_size = base_model[model_name]
-        self.num_classes = num_classes
         self.weight_path = os.path.join(pre_trained_model_path, self.model_name+".h5")
         self.img_augmentation = Sequential(
             [
@@ -42,7 +43,7 @@ class Classifier:
             name="img_augmentation",
         )
 
-    def build_model(self):
+    def build_model(self, num_classes):
         inputs = layers.Input(shape=(self.image_size, self.image_size, 3))
         x = self.img_augmentation(inputs)
         model = self.base_model(include_top=False, input_tensor=x, weights=self.weight_path)
@@ -56,11 +57,11 @@ class Classifier:
 
         top_dropout_rate = 0.2
         x = layers.Dropout(top_dropout_rate, name="top_dropout")(x)
-        outputs = layers.Dense(self.num_classes, activation="softmax", name="pred")(x)
+        outputs = layers.Dense(num_classes, activation="softmax", name="pred")(x)
 
         # Compile
         model = tf.keras.Model(inputs, outputs, name=self.model_name)
-        optimizer = tf.keras.optimizers.Adam(learning_rate=1e-2)
+        optimizer = tf.keras.optimizers.Adam(learning_rate=self.lr)
         model.compile(
             optimizer=optimizer, loss="categorical_crossentropy", metrics=["accuracy"]
         )
@@ -72,7 +73,12 @@ class Classifier:
             if not isinstance(layer, layers.BatchNormalization):
                 layer.trainable = True
 
-        optimizer = tf.keras.optimizers.Adam(learning_rate=1e-4)
+        optimizer = tf.keras.optimizers.Adam(learning_rate=self.lr)
         model.compile(
             optimizer=optimizer, loss="categorical_crossentropy", metrics=["accuracy"]
         )
+
+    def step_decay_scheduler(self, epoch):
+        drop = 0.5
+        epochs_drop = 10.0
+        return self.lr * math.pow(drop, math.floor((1 + epoch) / epochs_drop))

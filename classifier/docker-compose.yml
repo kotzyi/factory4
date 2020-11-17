@@ -6,6 +6,7 @@ services:
                 command: /home/classifier/entrypoint.sh
                 runtime: nvidia
                 environment:
+                        - "LEARNING_RATE=${LEARNING_RATE}"
                         - "EPOCHS=${EPOCHS}"
                         - "MODEL_SAVE_PATH=${MODEL_SAVE_PATH}"
                         - "PRE_TRAINED_MODEL_PATH=${PRE_TRAINED_MODEL_PATH}"
