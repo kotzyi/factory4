@@ -16,14 +16,14 @@ from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
 
 base_model = {
-    'efficientnet-b0': (EfficientNetB0, 224),
-    'efficientnet-b1': (EfficientNetB1, 240),
-    'efficientnet-b2': (EfficientNetB2, 260),
-    'efficientnet-b3': (EfficientNetB3, 300),
-    'efficientnet-b4': (EfficientNetB4, 380),
-    'efficientnet-b5': (EfficientNetB5, 456),
-    'efficientnet-b6': (EfficientNetB6, 528),
-    'efficientnet-b7': (EfficientNetB7, 600),
+    'b0': (EfficientNetB0, 224),
+    'b1': (EfficientNetB1, 240),
+    'b2': (EfficientNetB2, 260),
+    'b3': (EfficientNetB3, 300),
+    'b4': (EfficientNetB4, 380),
+    'b5': (EfficientNetB5, 456),
+    'b6': (EfficientNetB6, 528),
+    'b7': (EfficientNetB7, 600),
 }
 
 

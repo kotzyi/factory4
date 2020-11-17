@@ -29,7 +29,7 @@ def main():
     image_dir = os.getenv("IMAGE_DIR_PATH")
     model_name = os.getenv("MODEL_NAME")
     pre_trained_model_path = os.getenv("PRE_TRAINED_MODEL_PATH")
-    model_save_path = os.path.join(os.getenv("MODEL_SAVE_PATH"), model_name + "-" + unixtime + ".hdf5")
+    model_save_path = os.getenv("MODEL_SAVE_PATH") # os.path.join(os.getenv("MODEL_SAVE_PATH"), model_name + "-" + unixtime + ".hdf5")
 
     classifier = Classifier(model_name, learning_rate, pre_trained_model_path)
     image_size = classifier.image_size
@@ -45,7 +45,7 @@ def main():
     # Adding Callbacks to model
     terminate_on_nan = TerminateOnNaN()
     learning_rate_scheduler = LearningRateScheduler(classifier.step_decay_scheduler, verbose=0)
-    checkpointer = ModelCheckpoint(filepath=model_save_path, verbose=1, save_best_only=True)
+    # checkpointer = ModelCheckpoint(filepath=model_save_path, verbose=1, save_best_only=True)
     tensorboard = TensorBoard(
         log_dir='./logs',
         histogram_freq=0,
@@ -58,7 +58,7 @@ def main():
         embeddings_metadata=None,
         embeddings_data=None,
         update_freq='epoch')
-    callbacks = [checkpointer, tensorboard, terminate_on_nan, learning_rate_scheduler]
+    callbacks = [tensorboard, terminate_on_nan, learning_rate_scheduler]
 
     history = model.fit(
         train_dataset,
@@ -67,6 +67,7 @@ def main():
         verbose=1,
         callbacks=callbacks)
 
+    model.save(model_save_path)
 
 if __name__ == "__main__":
     main()
