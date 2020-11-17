@@ -1,5 +1,7 @@
 import os
+import time
 import tensorflow as tf
+from tensorflow.keras.callbacks import ModelCheckpoint, TensorBoard, TerminateOnNaN
 from datasets import Dataset
 from model import Classifier
 
@@ -15,12 +17,14 @@ def main():
         print("Not connected to a TPU runtime. Using CPU/GPU strategy")
         strategy = tf.distribute.MirroredStrategy()
 
+    unixtime = str(int(time.time()))
+    epochs = int(os.getenv("EPOCHS"))
     batch_size = int(os.getenv("BATCH_SIZE"))
     num_classes = int(os.getenv("NUM_CLASSES"))
     image_dir = os.getenv("IMAGE_DIR_PATH")
     model_name = os.getenv("MODEL_NAME")
     pre_trained_model_path = os.getenv("PRE_TRAINED_MODEL_PATH")
-    model_save_path = os.getenv("MODEL_SAVE_PATH")
+    model_save_path = os.path.join(os.getenv("MODEL_SAVE_PATH"), model_name + "-" + unixtime + ".hdf5")
 
     classifier = Classifier(model_name, num_classes, pre_trained_model_path)
     image_size = classifier.image_size
@@ -33,10 +37,27 @@ def main():
 
     classifier.unfreeze_model(model)
 
-    epochs = 10  # @param {type: "slider", min:8, max:50}
-    hist = model.fit(train_dataset, epochs=epochs, validation_data=val_dataset, verbose=2)
+    terminate_on_nan = TerminateOnNaN()
+    checkpointer = ModelCheckpoint(filepath=model_save_path, verbose=1, save_best_only=True)
+    tensorboard = TensorBoard(
+        log_dir='./logs',
+        histogram_freq=0,
+        batch_size=batch_size,
+        write_graph=True,
+        write_grads=False,
+        write_images=False,
+        embeddings_freq=0,
+        embeddings_layer_names=None,
+        embeddings_metadata=None,
+        embeddings_data=None,
+        update_freq='epoch')
+    history = model.fit(
+        train_dataset,
+        epochs=epochs,
+        validation_data=val_dataset,
+        verbose=1,
+        callbacks=[checkpointer, tensorboard, terminate_on_nan])
 
-    model.save(model_save_path)
 
 if __name__ == "__main__":
     main()

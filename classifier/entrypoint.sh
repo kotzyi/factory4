@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "CLEAR EX-TRAINED-MODEL AND IMAGES"
+rm -rf $MODEL_SAVE_PATH/*
+
 echo "UPDATE EFFICIENT-NET LATEST WEIGHT"
 python /home/classifier/efficient_weight_update.py \
   --model b1 \
