@@ -5,7 +5,10 @@ from tensorflow.keras.applications import (
     EfficientNetB1,
     EfficientNetB2,
     EfficientNetB3,
-    EfficientNetB4
+    EfficientNetB4,
+    EfficientNetB5,
+    EfficientNetB6,
+    EfficientNetB7,
 )
 from tensorflow.keras.layers.experimental import preprocessing
 from tensorflow.keras import layers
@@ -17,6 +20,9 @@ base_model = {
     'efficientnet-b2': (EfficientNetB2, 260),
     'efficientnet-b3': (EfficientNetB3, 300),
     'efficientnet-b4': (EfficientNetB4, 380),
+    'efficientnet-b5': (EfficientNetB5, 456),
+    'efficientnet-b6': (EfficientNetB6, 528),
+    'efficientnet-b7': (EfficientNetB7, 600),
 }
 
 
