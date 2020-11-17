@@ -29,7 +29,7 @@ def main():
     image_dir = os.getenv("IMAGE_DIR_PATH")
     model_name = os.getenv("MODEL_NAME")
     pre_trained_model_path = os.getenv("PRE_TRAINED_MODEL_PATH")
-    model_save_path = os.getenv("MODEL_SAVE_PATH") # os.path.join(os.getenv("MODEL_SAVE_PATH"), model_name + "-" + unixtime + ".hdf5")
+    model_save_path = os.path.join(os.getenv("MODEL_SAVE_PATH"), "saved_model")
 
     classifier = Classifier(model_name, learning_rate, pre_trained_model_path)
     image_size = classifier.image_size
