@@ -2,10 +2,11 @@ version: '3'
 services:
         factory4:
                 container_name: classifier
-                image: kotzyi/classifier:0.0.2
+                image: kotzyi/classifier:0.1.0
                 command: /home/classifier/entrypoint.sh
                 runtime: nvidia
                 environment:
+                        - "AZURE_IMAGE_DIR_PATH=${AZURE_IMAGE_DIR_PATH}"
                         - "LEARNING_RATE=${LEARNING_RATE}"
                         - "EPOCHS=${EPOCHS}"
                         - "MODEL_SAVE_PATH=${MODEL_SAVE_PATH}"
@@ -19,5 +20,4 @@ services:
                         - "AZURE_STORAGE_CONNECTION_STRING=${AZURE_STORAGE_CONNECTION_STRING}"
                 volumes:
                         - /datadrive/jlee/projects/github.com/kotzyi/factory4/classifier/:/home/classifier/
-                        - /datadrive/jlee/images:/home/classifier/images
                 working_dir: /home/classifier/

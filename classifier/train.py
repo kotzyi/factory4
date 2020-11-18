@@ -2,12 +2,9 @@ import os
 import time
 import math
 import tensorflow as tf
-from tensorflow.keras.callbacks import ModelCheckpoint, TensorBoard, TerminateOnNaN, EarlyStopping, LearningRateScheduler
+from tensorflow.keras.callbacks import TensorBoard, TerminateOnNaN, LearningRateScheduler
 from datasets import Dataset
 from model import Classifier
-
-
-
 
 
 def main():
@@ -21,7 +18,6 @@ def main():
         print("Not connected to a TPU runtime. Using CPU/GPU strategy")
         strategy = tf.distribute.MirroredStrategy()
 
-    unixtime = str(int(time.time()))
     epochs = int(os.getenv("EPOCHS"))
     learning_rate = os.getenv("LEARNING_RATE")
     batch_size = int(os.getenv("BATCH_SIZE"))
