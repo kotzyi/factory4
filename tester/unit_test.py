@@ -11,7 +11,7 @@ class TestModelGeneration(unittest.TestCase):
         msg = {}
         msg['FACTORY_ID'] = "233"
         msg['LEARN_ID'] = "252"
-        msg['AZURE_SHARE_NAME'] = "learn-info"
+        msg['AZURE_SHARE_NAME'] = "model"
         msg['AZURE_IMAGE_DIR_PATH'] = "233/252/user"
         msg['AZURE_LABEL_DIR_PATH'] = "233/252/annotations"
         msg['AZURE_MODEL_DIR_PATH'] = "233/252/model"
