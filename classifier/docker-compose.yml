@@ -6,7 +6,7 @@ services:
                 command: /home/classifier/entrypoint.sh
                 runtime: nvidia
                 environment:
-                        - "AZURE_IMAGE_DIR_PATH=${AZURE_IMAGE_DIR_PATH}"
+                        - "AZURE_CLASS_IMAGE_DIR_PATH=${AZURE_CLASS_IMAGE_DIR_PATH}"
                         - "LEARNING_RATE=${LEARNING_RATE}"
                         - "EPOCHS=${EPOCHS}"
                         - "MODEL_SAVE_PATH=${MODEL_SAVE_PATH}"
