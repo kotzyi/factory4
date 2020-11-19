@@ -29,20 +29,15 @@ services:
                         - "MODEL_PIPELINE_CONFIG_PATH=${MODEL_PIPELINE_CONFIG_PATH}"
                         - "INPUT_TYPE=${INPUT_TYPE}"
                         - "TRAINED_CHECKPOINT_PATH=${TRAINED_CHECKPOINT_PATH}"
-                        - "MODEL_OUTPUT_PATH=${MODEL_OUTPUT_PATH}"
+                        - "MODEL_SAVE_PATH=${MODEL_SAVE_PATH}"
                         - "PRE_TRAINED_MODEL_PATH=${PRE_TRAINED_MODEL_PATH}"
                         - "AZURE_STORAGE_CONNECTION_STRING=${AZURE_STORAGE_CONNECTION_STRING}"
                         - "MODEL_NAME=${MODEL_NAME}"
                         - "AZURE_SHARE_NAME=${AZURE_SHARE_NAME}"
-                        - "AZURE_IMAGE_DIR_PATH=${AZURE_IMAGE_DIR_PATH}"
+                        - "AZURE_OBJECT_IMAGE_DIR_PATH=${AZURE_OBJECT_IMAGE_DIR_PATH}"
                         - "AZURE_LABEL_DIR_PATH=${AZURE_LABEL_DIR_PATH}"
                         - "AZURE_MODEL_DIR_PATH=${AZURE_MODEL_DIR_PATH}"
                 volumes:
-                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/images:/home/detector/workspace/images
-                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/annotations/:/home/detector/workspace/annotations
-                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/models/pre-trained-models:/home/detector/workspace/models/pre-trained-models
-                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/models/exported-models:/home/detector/workspace/models/exported-models
-                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/entrypoint.sh:/home/detector/entrypoint.sh
-                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/scripts:/home/detector/scripts
+                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/:/home/detector/
                 ports:
                         - "60066:60066"

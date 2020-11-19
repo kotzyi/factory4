@@ -59,7 +59,7 @@ def main():
     local_image_path = os.getenv('IMAGE_DIR_PATH')
     connection_string = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
     share_name = os.getenv('AZURE_SHARE_NAME')
-    source_dir_path = os.getenv('AZURE_IMAGE_DIR_PATH')
+    source_dir_path = os.getenv('AZURE_CLASS_IMAGE_DIR_PATH')
 
     download(connection_string, share_name, source_dir_path, local_image_path)
 

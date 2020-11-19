@@ -11,10 +11,11 @@ class TestModelGeneration(unittest.TestCase):
         msg = {}
         msg['FACTORY_ID'] = "233"
         msg['LEARN_ID'] = "252"
-        msg['AZURE_SHARE_NAME'] = "model"
-        msg['AZURE_IMAGE_DIR_PATH'] = "233/252/user"
-        msg['AZURE_LABEL_DIR_PATH'] = "233/252/annotations"
-        msg['AZURE_MODEL_DIR_PATH'] = "233/252/model"
+        msg['AZURE_SHARE_NAME'] = "models"
+        msg['AZURE_CLASS_IMAGE_DIR_PATH'] = "detach/train_images"
+        msg['AZURE_OBJECT_IMAGE_DIR_PATH'] = "detach/images"
+        msg['AZURE_LABEL_DIR_PATH'] = "detach/annotations"
+        msg['AZURE_MODEL_DIR_PATH'] = "detach/models"
 
         self.producer = KafkaProducer(
             bootstrap_servers=KafkaConfig.object_detector.bootstrap_servers,

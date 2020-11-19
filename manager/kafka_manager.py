@@ -16,7 +16,7 @@ class KafkaManager:
             auto_offset_reset='smallest',
             enable_auto_commit=True,
             max_poll_interval_ms=3600000)
-        self.consumer.subscribe(topics=conf.consumer.topic.split(','))
+        self.consumer.subscribe(topics=conf.consumer.topics)
 
     def produce(self, value):
         self.producer.send(topic=self.conf.producer.topic, value=value)

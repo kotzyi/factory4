@@ -1,13 +1,9 @@
 import os
-import argparse
 from azure.core.exceptions import (
-    ResourceExistsError,
     ResourceNotFoundError
 )
 
 from azure.storage.fileshare import (
-    ShareServiceClient,
-    ShareClient,
     ShareDirectoryClient,
     ShareFileClient
 )
@@ -60,7 +56,7 @@ def main():
     connection_string = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
     share_name = os.getenv('AZURE_SHARE_NAME')
     label_dir_path = os.getenv('AZURE_LABEL_DIR_PATH')
-    image_dir_path = os.getenv('AZURE_IMAGE_DIR_PATH')
+    image_dir_path = os.getenv('AZURE_OBJECT_IMAGE_DIR_PATH')
 
     image_file_path_list = list_files_in_azure_directory(connection_string, share_name, image_dir_path)
     image_label_file_path_list = list_files_in_azure_directory(connection_string, share_name, label_dir_path)
