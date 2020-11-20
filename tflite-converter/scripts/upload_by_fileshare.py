@@ -1,16 +1,9 @@
 import os
-import argparse
 from azure.core.exceptions import (
     ResourceExistsError,
     ResourceNotFoundError
 )
-
-from azure.storage.fileshare import (
-    ShareServiceClient,
-    ShareClient,
-    ShareDirectoryClient,
-    ShareFileClient
-)
+from azure.storage.fileshare import ShareFileClient
 
 
 def upload_local_file(connection_string, local_file_path, share_name, dest_file_path):
@@ -33,7 +26,7 @@ def upload_local_file(connection_string, local_file_path, share_name, dest_file_
 
 
 def main():
-    model_file_name = os.getenv('MODEL_FILE_NAME')
+    model_file_name = os.getenv('MODEL_FILENAME_PREFIX') + "_" + os.getenv('MODEL_FILE_NAME')
     saved_model_dir = os.getenv('EXPORTED_MODEL_SAVED_PATH')
     connection_string = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
     share_name = os.getenv('AZURE_SHARE_NAME')
