@@ -110,8 +110,7 @@ docker:
             - MODEL_FILE_NAME=model.tflite
             - AZURE_STORAGE_CONNECTION_STRING=
         volumes:
-            - /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite-converter/entrypoint.sh:/home/tflite-converter/entrypoint.sh
-            - /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite-converter/scripts:/home/tflite-converter/scripts
+            - /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite-converter/:/home/tflite-converter/
         model_volume_by_topic:
             CVT_CL_TF_MDL: /datadrive/jlee/projects/github.com/kotzyi/factory4/classifier/models/exported-models:/home/tflite-converter/models/exported-models
             CVT_OD_TF_MDL: /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/models/exported-models:/home/tflite-converter/models/exported-models
