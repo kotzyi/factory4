@@ -35,6 +35,7 @@ def main():
                 envs = json.loads(value[0].value)
                 topic = key.topic
             model_volumes.append([docker_conf.model_volume_by_topic[topic]])
+            envs['MODEL_FILENAME_PREFIX'] = docker_conf.model_filename_prefix_by_topic[topic]
 
             logger.info(f"MSG RECEIVED")
             logger.info(f"TOPIC: {topic}")
@@ -42,7 +43,7 @@ def main():
             logger.info(f"VALUES: {envs}")
 
             tflite_converter.run(envs, model_volumes)
-            # tflite_converter_kafka_manager.produce(envs)
+            tflite_converter_kafka_manager.produce(envs)
         else:
             time.sleep(kafka_conf.consumer.sleep)
 

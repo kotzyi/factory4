@@ -114,3 +114,6 @@ docker:
         model_volume_by_topic:
             CVT_CL_TF_MDL: /datadrive/jlee/projects/github.com/kotzyi/factory4/classifier/models/exported-models:/home/tflite-converter/models/exported-models
             CVT_OD_TF_MDL: /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/models/exported-models:/home/tflite-converter/models/exported-models
+        model_filename_prefix_by_topic:
+            CVT_CL_TF_MDL: class
+            CVT_OD_TF_MDL: detect

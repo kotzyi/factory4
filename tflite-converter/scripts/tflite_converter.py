@@ -3,7 +3,7 @@ import tensorflow as tf
 
 
 def main():
-    model_file_name = os.getenv('MODEL_FILE_NAME')
+    model_file_name = os.getenv('MODEL_FILENAME_PREFIX') + "_" + os.getenv('MODEL_FILE_NAME')
     saved_model_dir = os.getenv('EXPORTED_MODEL_SAVED_PATH')
 
     model = tf.saved_model.load(saved_model_dir)
