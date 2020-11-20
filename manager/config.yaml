@@ -3,7 +3,7 @@ kafka:
         bootstrap_servers: 52.141.56.0:9092
         producer: &default_producer
             partition: 0
-            topic: CVT_TF_MDL
+            topic: CVT_OD_TF_MDL
             msg_format:
                 - AZURE_SHARE_NAME
                 - AZURE_OBJECT_IMAGE_DIR_PATH
@@ -29,7 +29,7 @@ kafka:
         bootstrap_servers: 52.141.56.0:9092
         producer:
             <<: *default_producer
-            topic: CVT_TF_MDL
+            topic: CVT_CL_TF_MDL
         consumer:
             <<: *default_consumer
             consumer_group_id: CLASSIFIER
@@ -45,7 +45,7 @@ kafka:
         consumer:
             <<: *default_consumer
             consumer_group_id: TF_CONVERTER
-            topics: [CVT_TF_MDL]
+            topics: [CVT_CL_TF_MDL, CVT_OD_TF_MDL]
 
 docker:
     object_detector:
@@ -106,9 +106,12 @@ docker:
         command: /home/tflite-converter/entrypoint.sh
         runtime: nvidia
         environment:
-            - EXPORTED_MODEL_SAVED_PATH=/home/tflite-converter/exported-models/saved_model
+            - EXPORTED_MODEL_SAVED_PATH=/home/tflite-converter/models/exported-models/saved_model/
             - MODEL_FILE_NAME=model.tflite
             - AZURE_STORAGE_CONNECTION_STRING=
         volumes:
             - /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite-converter/entrypoint.sh:/home/tflite-converter/entrypoint.sh
             - /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite-converter/scripts:/home/tflite-converter/scripts
+        model_volume_by_topic:
+            CVT_CL_TF_MDL: /datadrive/jlee/projects/github.com/kotzyi/factory4/classifier/models/exported-models:/home/tflite-converter/models/exported-models
+            CVT_OD_TF_MDL: /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/models/exported-models:/home/tflite-converter/models/exported-models

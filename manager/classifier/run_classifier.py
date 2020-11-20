@@ -1,3 +1,4 @@
+import os
 import time
 import json
 import logging
@@ -36,7 +37,7 @@ def main():
             logger.info(f"CONSUMER_GROUP_ID: {kafka_conf.consumer.consumer_group_id}")
             logger.info(f"VALUES: {envs}")
 
-            # classifier.run(envs)
+            classifier.run(envs)
             classifier_kafka_manager.produce(envs)
         else:
             time.sleep(kafka_conf.consumer.sleep)

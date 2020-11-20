@@ -29,15 +29,19 @@ def main():
 
         if message:
             envs = {}
+            model_volumes = []
+            topic = ""
             for key, value in message.items():
                 envs = json.loads(value[0].value)
+                topic = key.topic
+            model_volumes.append([docker_conf.model_volume_by_topic[topic]])
 
             logger.info(f"MSG RECEIVED")
-            logger.info(f"TOPIC: {kafka_conf.consumer.topics}")
+            logger.info(f"TOPIC: {topic}")
             logger.info(f"CONSUMER_GROUP_ID: {kafka_conf.consumer.consumer_group_id}")
             logger.info(f"VALUES: {envs}")
 
-            # tflite_converter.run(envs)
+            tflite_converter.run(envs, model_volumes)
             # tflite_converter_kafka_manager.produce(envs)
         else:
             time.sleep(kafka_conf.consumer.sleep)

@@ -6,9 +6,12 @@ class DockerManager:
         self.conf = conf
         self.client = docker.from_env()
 
-    def run(self, envs):
+    def run(self, envs, volumes=[]):
         for key, value in envs.items():
             self.conf.environment.append(str(key) + "=" + str(value))
+
+        for volume in volumes:
+            self.conf.volumes += volume
 
         self.client.containers.run(
             image=self.conf.image,
