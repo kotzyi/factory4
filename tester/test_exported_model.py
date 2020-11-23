@@ -22,9 +22,9 @@ gpus = tf.config.experimental.list_physical_devices('GPU')
 for gpu in gpus:
     tf.config.experimental.set_memory_growth(gpu, True)
 
-IMAGE_PATHS = '/datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/images/tester/0.jpg'
-PATH_TO_LABELS = '/datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/annotations/label_map.pbtxt'
-EXPORTED_MODEL = '/datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/models/exported-models/saved_model'
+IMAGE_PATHS = '/datadrive/jlee/projects/github.com/kotzyi/factory4/detector/images/tester/0.jpg'
+PATH_TO_LABELS = '/datadrive/jlee/projects/github.com/kotzyi/factory4/detector/annotations/label_map.pbtxt'
+EXPORTED_MODEL = '/datadrive/jlee/projects/github.com/kotzyi/factory4/detector/models/exported-models/saved_model'
 start_time = time.time()
 
 # Load saved model and build the detection function

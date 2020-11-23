@@ -1,9 +1,9 @@
 version: '3'
 services:
         factory4:
-                container_name: object_detector
-                image: kotzyi/model-trainer:0.1.1
-                command: /home/detector/entrypoint.sh
+                container_name: detector
+                image: kotzyi/detector:latest
+                command: /home/detector/workspace/entrypoint.sh
                 runtime: nvidia
                 environment:
                         - "NUM_CLASS=${NUM_CLASS}"
@@ -38,6 +38,6 @@ services:
                         - "AZURE_LABEL_DIR_PATH=${AZURE_LABEL_DIR_PATH}"
                         - "AZURE_MODEL_DIR_PATH=${AZURE_MODEL_DIR_PATH}"
                 volumes:
-                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/:/home/detector/
+                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/detector/:/home/detector/workspace/
                 ports:
                         - "60066:60066"

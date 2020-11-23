@@ -58,7 +58,9 @@ def main():
 
     config_text = text_format.MessageToString(pipeline_config)
 
-    with tf.gfile.Open(edited_pipeline, "wb") as f:
+    os.makedirs(os.path.dirname(edited_pipeline), exist_ok=True)
+
+    with tf.gfile.Open(edited_pipeline, "wb+") as f:
         f.write(config_text)
 
 

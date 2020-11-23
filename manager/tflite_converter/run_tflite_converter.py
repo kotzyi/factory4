@@ -42,7 +42,7 @@ def main():
             logger.info(f"CONSUMER_GROUP_ID: {kafka_conf.consumer.consumer_group_id}")
             logger.info(f"VALUES: {envs}")
 
-            tflite_converter.run(envs, model_volumes)
+            # tflite_converter.run(envs, model_volumes)
             tflite_converter_kafka_manager.produce(envs)
         else:
             time.sleep(kafka_conf.consumer.sleep)

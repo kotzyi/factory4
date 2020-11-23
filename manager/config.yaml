@@ -49,9 +49,9 @@ kafka:
 
 docker:
     object_detector:
-        build_context: /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector
-        image: kotzyi/model-trainer:0.1.1
-        command: /home/detector/entrypoint.sh
+        build_context: /datadrive/jlee/projects/github.com/kotzyi/factory4/detector
+        image: kotzyi/detector:latest
+        command: /home/detector/workspace/entrypoint.sh
         runtime: nvidia
         environment:
             - NUM_CLASS=2
@@ -64,25 +64,25 @@ docker:
             - WARMUP_STEP=100
             - CLASSIFICATION_WEIGHT=1.0
             - LOCALIZATION_WEIGHT=1.0
-            - IMAGE_LABEL_DIR=/home/detector/annotations/
-            - IMAEG_PATH=/home/detector/images
-            - TRAIN_IMAGE_PATH=/home/detector/images/train
-            - TRAIN_IMAGE_LABEL_PATH=/home/detector/annotations/label_map.pbtxt
-            - TRAIN_IMAGE_TFRECORD_PATH=/home/detector/annotations/train.record
-            - TEST_IMAGE_PATH=/home/detector/images/tester
-            - TEST_IMAGE_LABEL_PATH=/home/detector/annotations/label_map.pbtxt
-            - TEST_IMAGE_TFRECORD_PATH=/home/detector/annotations/tester.record
+            - IMAGE_LABEL_DIR=/home/detector/workspace/annotations/
+            - IMAEG_PATH=/home/detector/workspace/images
+            - TRAIN_IMAGE_PATH=/home/detector/workspace/images/train
+            - TRAIN_IMAGE_LABEL_PATH=/home/detector/workspace/annotations/label_map.pbtxt
+            - TRAIN_IMAGE_TFRECORD_PATH=/home/detector/workspace/annotations/train.record
+            - TEST_IMAGE_PATH=/home/detector/workspace/images/tester
+            - TEST_IMAGE_LABEL_PATH=/home/detector/workspace/annotations/label_map.pbtxt
+            - TEST_IMAGE_TFRECORD_PATH=/home/detector/workspace/annotations/tester.record
             - TEST_IMAGE_RATIO=0.1 \
-            - MODEL_PATH=/home/detector/models/trained-models
-            - MODEL_PIPELINE_CONFIG_PATH=/home/detector/models/trained-models/pipeline.config
+            - MODEL_PATH=/home/detector/workspace/models/trained-models
+            - MODEL_PIPELINE_CONFIG_PATH=/home/detector/workspace/models/trained-models/pipeline.config
             - INPUT_TYPE=image_tensor
-            - MODEL_SAVE_PATH=/home/detector/models/exported-models
-            - TRAINED_CHECKPOINT_PATH=/home/detector/models/trained-models
+            - MODEL_SAVE_PATH=/home/detector/workspace/models/exported-models
+            - TRAINED_CHECKPOINT_PATH=/home/detector/workspace/models/trained-models
             - AZURE_STORAGE_CONNECTION_STRING=
             - MODEL_NAME=efficientdet_d0_coco17_tpu-32
-            - PRE_TRAINED_MODEL_PATH=/home/detector/models/pre-trained-models
+            - PRE_TRAINED_MODEL_PATH=/home/detector/workspace/models/pre-trained-models
         volumes:
-            - /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/:/home/detector/
+            - /datadrive/jlee/projects/github.com/kotzyi/factory4/detector/:/home/detector/workspace/
     classifier:
         build_context: /datadrive/jlee/projects/github.com/kotzyi/factory4/classifier
         image: kotzyi/classifier:0.1.0
@@ -113,7 +113,7 @@ docker:
             - /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite-converter/:/home/tflite-converter/
         model_volume_by_topic:
             CVT_CL_TF_MDL: /datadrive/jlee/projects/github.com/kotzyi/factory4/classifier/models/exported-models:/home/tflite-converter/models/exported-models
-            CVT_OD_TF_MDL: /datadrive/jlee/projects/github.com/kotzyi/factory4/object_detector/models/exported-models:/home/tflite-converter/models/exported-models
+            CVT_OD_TF_MDL: /datadrive/jlee/projects/github.com/kotzyi/factory4/detector/models/exported-models:/home/tflite-converter/models/exported-models
         model_filename_prefix_by_topic:
             CVT_CL_TF_MDL: class
             CVT_OD_TF_MDL: detect
