@@ -1,6 +1,7 @@
 import time
 import json
 import logging
+from manager.util import use_gpu
 from manager.kafka_manager import KafkaManager
 from manager.config import KafkaConfig
 from manager.config import DockerConfig
@@ -27,6 +28,9 @@ def main():
             timeout_ms=kafka_conf.consumer.consumer_timeout_ms,
             max_records=kafka_conf.consumer.max_records)
         if message:
+            while use_gpu():
+                print("sleeping")
+                time.sleep(kafka_conf.consumer.sleep)
             envs = {}
             for key, value in message.items():
                 envs = json.loads(value[0].value)
