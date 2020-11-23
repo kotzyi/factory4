@@ -17,27 +17,33 @@ def main():
         level=logging.INFO,
     )
 
-    docker_conf = DockerConfig.object_detector
-    kafka_conf = KafkaConfig.object_detector
-    object_detector = DockerManager(docker_conf)
-    object_detect_kafka_manager = KafkaManager(kafka_conf)
+    docker_conf = DockerConfig.converter
+    kafka_conf = KafkaConfig.converter
+    converter = DockerManager(docker_conf)
+    converter_kafka_manager = KafkaManager(kafka_conf)
 
     while True:
-        message = object_detect_kafka_manager.poll(
+        message = converter_kafka_manager.poll(
             timeout_ms=kafka_conf.consumer.consumer_timeout_ms,
             max_records=kafka_conf.consumer.max_records)
+
         if message:
             envs = {}
+            model_volumes = []
+            topic = ""
             for key, value in message.items():
                 envs = json.loads(value[0].value)
+                topic = key.topic
+            model_volumes.append([docker_conf.model_volume_by_topic[topic]])
+            envs['MODEL_FILENAME_PREFIX'] = docker_conf.model_filename_prefix_by_topic[topic]
 
             logger.info(f"MSG RECEIVED")
-            logger.info(f"TOPIC: {kafka_conf.consumer.topics}")
+            logger.info(f"TOPIC: {topic}")
             logger.info(f"CONSUMER_GROUP_ID: {kafka_conf.consumer.consumer_group_id}")
             logger.info(f"VALUES: {envs}")
 
-            object_detector.run(envs)
-            object_detect_kafka_manager.produce(envs)
+            # converter.run(envs, model_volumes)
+            converter_kafka_manager.produce(envs)
         else:
             time.sleep(kafka_conf.consumer.sleep)
 

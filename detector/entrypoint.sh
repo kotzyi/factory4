@@ -1,12 +1,12 @@
 #!/bin/bash
 
 echo "CLEAR EX-TRAINED-MODEL AND IMAGES"
-#rm -rf $MODEL_SAVE_PATH/*
-#rm -rf $IMAGE_LABEL_DIR/*
-#rm -rf $IMAGE_PATH/*
-#rm -rf $TRAIN_IMAGE_PATH/*
-#rm -rf $TEST_IMAGE_PATH/*
-#rm -rf $MODEL_PATH/*
+rm -rf $MODEL_SAVE_PATH/*
+rm -rf $IMAGE_LABEL_DIR/*
+rm -rf $IMAGE_PATH/*
+rm -rf $TRAIN_IMAGE_PATH/*
+rm -rf $TEST_IMAGE_PATH/*
+rm -rf $MODEL_PATH/*
 
 echo "EDIT PIPELINE CONFIGURATION"
 python /home/detector/workspace/scripts/edit_pipeline.py

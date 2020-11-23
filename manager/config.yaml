@@ -1,5 +1,5 @@
 kafka:
-    object_detector:
+    detector:
         bootstrap_servers: 52.141.56.0:9092
         producer: &default_producer
             partition: 0
@@ -37,7 +37,7 @@ kafka:
             msg_format:
                 - AZURE_SHARE_NAME
                 - AZURE_CLASS_IMAGE_DIR_PATH
-    tflite_converter:
+    converter:
         bootstrap_servers: 52.141.56.0:9092
         producer:
             <<: *default_producer
@@ -48,31 +48,31 @@ kafka:
             topics: [CVT_CL_TF_MDL, CVT_OD_TF_MDL]
 
 docker:
-    object_detector:
+    detector:
         build_context: /datadrive/jlee/projects/github.com/kotzyi/factory4/detector
         image: kotzyi/detector:latest
         command: /home/detector/workspace/entrypoint.sh
         runtime: nvidia
         environment:
             - NUM_CLASS=2
-            - IMAGE_SIZE=384
-            - BATCH_SIZE=16
+            - IMAGE_SIZE=512
+            - BATCH_SIZE=4
             - TOTAL_STEP=10000
             - NUM_BOXES=10
             - REPLICAS_TO_AGGREGATE=8
             - MODEL_TYPE=detection
-            - WARMUP_STEP=100
+            - WARMUP_STEP=500
             - CLASSIFICATION_WEIGHT=1.0
             - LOCALIZATION_WEIGHT=1.0
+            - IMAGE_PATH=/home/detector/workspace/images
             - IMAGE_LABEL_DIR=/home/detector/workspace/annotations/
-            - IMAEG_PATH=/home/detector/workspace/images
             - TRAIN_IMAGE_PATH=/home/detector/workspace/images/train
             - TRAIN_IMAGE_LABEL_PATH=/home/detector/workspace/annotations/label_map.pbtxt
             - TRAIN_IMAGE_TFRECORD_PATH=/home/detector/workspace/annotations/train.record
             - TEST_IMAGE_PATH=/home/detector/workspace/images/tester
             - TEST_IMAGE_LABEL_PATH=/home/detector/workspace/annotations/label_map.pbtxt
             - TEST_IMAGE_TFRECORD_PATH=/home/detector/workspace/annotations/tester.record
-            - TEST_IMAGE_RATIO=0.1 \
+            - TEST_IMAGE_RATIO=0.1
             - MODEL_PATH=/home/detector/workspace/models/trained-models
             - MODEL_PIPELINE_CONFIG_PATH=/home/detector/workspace/models/trained-models/pipeline.config
             - INPUT_TYPE=image_tensor
@@ -100,20 +100,20 @@ docker:
             - NUM_CLASSES=2
         volumes:
             - /datadrive/jlee/projects/github.com/kotzyi/factory4/classifier/:/home/classifier/
-    tflite_converter:
-        build_context: /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite_converter
-        image: kotzyi/tflite-converter:0.1.0
-        command: /home/tflite-converter/entrypoint.sh
+    converter:
+        build_context: /datadrive/jlee/projects/github.com/kotzyi/factory4/converter
+        image: kotzyi/converter:latest
+        command: /home/converter/entrypoint.sh
         runtime: nvidia
         environment:
-            - EXPORTED_MODEL_SAVED_PATH=/home/tflite-converter/models/exported-models/saved_model/
+            - EXPORTED_MODEL_SAVED_PATH=/home/converter/models/exported-models/saved_model/
             - MODEL_FILE_NAME=model.tflite
             - AZURE_STORAGE_CONNECTION_STRING=
         volumes:
-            - /datadrive/jlee/projects/github.com/kotzyi/factory4/tflite-converter/:/home/tflite-converter/
+            - /datadrive/jlee/projects/github.com/kotzyi/factory4/converter/:/home/converter/
         model_volume_by_topic:
-            CVT_CL_TF_MDL: /datadrive/jlee/projects/github.com/kotzyi/factory4/classifier/models/exported-models:/home/tflite-converter/models/exported-models
-            CVT_OD_TF_MDL: /datadrive/jlee/projects/github.com/kotzyi/factory4/detector/models/exported-models:/home/tflite-converter/models/exported-models
+            CVT_CL_TF_MDL: /datadrive/jlee/projects/github.com/kotzyi/factory4/classifier/models/exported-models:/home/converter/models/exported-models
+            CVT_OD_TF_MDL: /datadrive/jlee/projects/github.com/kotzyi/factory4/detector/models/exported-models:/home/converter/models/exported-models
         model_filename_prefix_by_topic:
             CVT_CL_TF_MDL: class
             CVT_OD_TF_MDL: detect

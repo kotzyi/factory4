@@ -18,7 +18,7 @@ class TestModelGeneration(unittest.TestCase):
         msg['AZURE_MODEL_DIR_PATH'] = "detach/models"
 
         self.producer = KafkaProducer(
-            bootstrap_servers=KafkaConfig.object_detector.bootstrap_servers,
+            bootstrap_servers=KafkaConfig.detector.bootstrap_servers,
             value_serializer=lambda x: json.dumps(x, default=json_util.default).encode('utf-8'))
 
         self.producer.send(topic='REQ_CVT_TF_MDL', value=msg)
