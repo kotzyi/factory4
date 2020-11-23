@@ -4,26 +4,12 @@ kafka:
         producer: &default_producer
             partition: 0
             topic: CVT_OD_TF_MDL
-            msg_format:
-                - AZURE_SHARE_NAME
-                - AZURE_OBJECT_IMAGE_DIR_PATH
-                - AZURE_CLASS_IMAGE_DIR_PATH
-                - AZURE_LABEL_DIR_PATH
-                - MODEL_NUM_CLASS
-                - MODEL_BATCH_SIZE
-                - MODEL_NUM_STEP
-                - MODEL_NUM_BOXES
-                - MODEL_FILE_NAME
         consumer: &default_consumer
             consumer_group_id: OBJECT_DETECTOR
             topics: [REQ_CVT_TF_MDL]
             consumer_timeout_ms: 5000
             sleep: 3
             max_records: 1
-            msg_format:
-                - AZURE_SHARE_NAME
-                - AZURE_IMAGE_DIR_PATH
-                - AZURE_LABEL_DIR_PATH
     classifier:
         model_type: classifier
         bootstrap_servers: 52.141.56.0:9092
@@ -34,9 +20,6 @@ kafka:
             <<: *default_consumer
             consumer_group_id: CLASSIFIER
             topics: [REQ_CVT_TF_MDL]
-            msg_format:
-                - AZURE_SHARE_NAME
-                - AZURE_CLASS_IMAGE_DIR_PATH
     converter:
         bootstrap_servers: 52.141.56.0:9092
         producer:
