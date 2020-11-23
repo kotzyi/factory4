@@ -36,8 +36,9 @@ def main():
             logger.info(f"CONSUMER_GROUP_ID: {kafka_conf.consumer.consumer_group_id}")
             logger.info(f"VALUES: {envs}")
 
-            detector.run(envs)
-            # detect_kafka_manager.produce(envs)
+            detector.add_env(envs)
+            detector.run()
+            detect_kafka_manager.produce(envs)
         else:
             time.sleep(kafka_conf.consumer.sleep)
 

@@ -1,6 +1,4 @@
 import os
-import time
-import math
 import tensorflow as tf
 from tensorflow.keras.callbacks import TensorBoard, TerminateOnNaN, LearningRateScheduler
 from datasets import Dataset
@@ -41,7 +39,6 @@ def main():
     # Adding Callbacks to model
     terminate_on_nan = TerminateOnNaN()
     learning_rate_scheduler = LearningRateScheduler(classifier.step_decay_scheduler, verbose=0)
-    # checkpointer = ModelCheckpoint(filepath=model_save_path, verbose=1, save_best_only=True)
     tensorboard = TensorBoard(
         log_dir='./logs',
         histogram_freq=0,
@@ -56,7 +53,7 @@ def main():
         update_freq='epoch')
     callbacks = [tensorboard, terminate_on_nan, learning_rate_scheduler]
 
-    history = model.fit(
+    model.fit(
         train_dataset,
         epochs=epochs,
         validation_data=val_dataset,
@@ -64,6 +61,7 @@ def main():
         callbacks=callbacks)
 
     model.save(model_save_path)
+
 
 if __name__ == "__main__":
     main()

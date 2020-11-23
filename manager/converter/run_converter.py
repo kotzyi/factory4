@@ -42,7 +42,9 @@ def main():
             logger.info(f"CONSUMER_GROUP_ID: {kafka_conf.consumer.consumer_group_id}")
             logger.info(f"VALUES: {envs}")
 
-            # converter.run(envs, model_volumes)
+            converter.add_env(envs)
+            converter.add_volumes(model_volumes)
+            converter.run()
             converter_kafka_manager.produce(envs)
         else:
             time.sleep(kafka_conf.consumer.sleep)
