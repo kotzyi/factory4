@@ -1,3 +1,38 @@
+model:
+    classifier:
+        b0: &default_classifier
+            IMAGE_SIZE: 224
+            BATCH_SIZE: 64
+            LEARNING_RATE: 1e-3
+            EPOCHS: 10
+        b1:
+            <<: *default_classifier
+            IMAGE_SIZE: 240
+        b2:
+            <<: *default_classifier
+            IMAGE_SIZE: 260
+        b3:
+            <<: *default_classifier
+            IMAGE_SIZE: 300
+        b4:
+            <<: *default_classifier
+            IMAGE_SIZE: 380
+        b5:
+            <<: *default_classifier
+            IMAGE_SIZE: 456
+        b6:
+            <<: *default_classifier
+            IMAGE_SIZE: 528
+        b7:
+            <<: *default_classifier
+            IMAGE_SIZE: 600
+    detector:
+        efficientdet_d0_coco17_tpu-32: 512
+        efficientdet_d1_coco17_tpu-32: 640
+        efficientdet_d2_coco17_tpu-32: 768
+        efficientdet_d3_coco17_tpu-32: 896
+        efficientdet_d4_coco17_tpu-32: 1024
+
 kafka:
     detector:
         bootstrap_servers: 52.141.56.0:9092
@@ -40,11 +75,11 @@ docker:
             - NUM_CLASS=2
             - IMAGE_SIZE=512
             - BATCH_SIZE=4
-            - TOTAL_STEP=10000
+            - TOTAL_STEP=100
             - NUM_BOXES=10
             - REPLICAS_TO_AGGREGATE=8
             - MODEL_TYPE=detection
-            - WARMUP_STEP=500
+            - WARMUP_STEP=10
             - CLASSIFICATION_WEIGHT=1.0
             - LOCALIZATION_WEIGHT=1.0
             - IMAGE_PATH=/home/detector/workspace/images
@@ -61,7 +96,7 @@ docker:
             - INPUT_TYPE=image_tensor
             - MODEL_SAVE_PATH=/home/detector/workspace/models/exported-models
             - TRAINED_CHECKPOINT_PATH=/home/detector/workspace/models/trained-models
-            - AZURE_STORAGE_CONNECTION_STRING=
+            - AZURE_STORAGE_CONNECTION_STRING=DefaultEndpointsProtocol=https;AccountName=storagefactory4kr;AccountKey=Q9dUPJxdR3a5RU4F0r3lhK9r9ajKmbASVLx3uxclkRvwLDW2FOx9T+9uvoK6tVRxPy4/9Mi64pP/tbfAf5Ncnw==;EndpointSuffix=core.windows.net
             - MODEL_NAME=efficientdet_d0_coco17_tpu-32
             - PRE_TRAINED_MODEL_PATH=/home/detector/workspace/models/pre-trained-models
         volumes:
@@ -77,7 +112,7 @@ docker:
             - MODEL_SAVE_PATH=/home/classifier/models/exported-models
             - PRE_TRAINED_MODEL_PATH=/home/classifier/models/pre-trained-models
             - IMAGE_DIR_PATH=/home/classifier/images
-            - AZURE_STORAGE_CONNECTION_STRING=
+            - AZURE_STORAGE_CONNECTION_STRING=DefaultEndpointsProtocol=https;AccountName=storagefactory4kr;AccountKey=Q9dUPJxdR3a5RU4F0r3lhK9r9ajKmbASVLx3uxclkRvwLDW2FOx9T+9uvoK6tVRxPy4/9Mi64pP/tbfAf5Ncnw==;EndpointSuffix=core.windows.net
             - MODEL_NAME=b0
             - BATCH_SIZE=64
             - NUM_CLASSES=2
@@ -91,7 +126,7 @@ docker:
         environment:
             - EXPORTED_MODEL_SAVED_PATH=/home/converter/models/exported-models/saved_model/
             - MODEL_FILE_NAME=model.tflite
-            - AZURE_STORAGE_CONNECTION_STRING=
+            - AZURE_STORAGE_CONNECTION_STRING=DefaultEndpointsProtocol=https;AccountName=storagefactory4kr;AccountKey=Q9dUPJxdR3a5RU4F0r3lhK9r9ajKmbASVLx3uxclkRvwLDW2FOx9T+9uvoK6tVRxPy4/9Mi64pP/tbfAf5Ncnw==;EndpointSuffix=core.windows.net
         volumes:
             - /datadrive/jlee/projects/github.com/kotzyi/factory4/converter/:/home/converter/
         model_volume_by_topic:

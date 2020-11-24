@@ -16,6 +16,8 @@ class TestModelGeneration(unittest.TestCase):
         msg['AZURE_OBJECT_IMAGE_DIR_PATH'] = "detach/images"
         msg['AZURE_LABEL_DIR_PATH'] = "detach/annotations"
         msg['AZURE_MODEL_DIR_PATH'] = "detach/models"
+        msg['CLASSIFIER_MODEL_NAME'] = "b0"
+        msg['DETECTOR_MODEL_NAME'] = "efficientdet_d0_coco17_tpu-32"
 
         self.producer = KafkaProducer(
             bootstrap_servers=KafkaConfig.detector.bootstrap_servers,

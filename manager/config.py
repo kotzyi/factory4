@@ -13,3 +13,8 @@ class KafkaConfig(metaclass=YAMLObject):
 class DockerConfig(metaclass=YAMLObject):
     source = os.path.join(ROOT_DIR, 'config.yaml')
     namespace = 'docker'
+
+
+class ModelConfig(metaclass=YAMLObject):
+    source = os.path.join(ROOT_DIR, 'config.yaml')
+    namespace = 'model'

@@ -2,9 +2,10 @@ import time
 import json
 import logging
 from manager.kafka_manager import KafkaManager
+from manager.docker_manager import DockerManager
 from manager.config import KafkaConfig
 from manager.config import DockerConfig
-from manager.docker_manager import DockerManager
+from manager.config import ModelConfig
 
 
 logger = logging.getLogger(__name__)
@@ -45,7 +46,7 @@ def main():
             converter.add_env(envs)
             converter.add_volumes(model_volumes)
             converter.run()
-            converter_kafka_manager.produce(envs)
+            # converter_kafka_manager.produce(envs)
         else:
             time.sleep(kafka_conf.consumer.sleep)
 

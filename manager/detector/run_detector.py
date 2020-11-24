@@ -1,11 +1,11 @@
 import time
 import json
 import logging
-from manager.util import use_gpu
 from manager.kafka_manager import KafkaManager
+from manager.docker_manager import DockerManager
 from manager.config import KafkaConfig
 from manager.config import DockerConfig
-from manager.docker_manager import DockerManager
+from manager.config import ModelConfig
 
 
 logger = logging.getLogger(__name__)
@@ -20,6 +20,7 @@ def main():
 
     docker_conf = DockerConfig.detector
     kafka_conf = KafkaConfig.detector
+    model_conf = ModelConfig.detector
     detector = DockerManager(docker_conf)
     detect_kafka_manager = KafkaManager(kafka_conf)
 
@@ -28,9 +29,6 @@ def main():
             timeout_ms=kafka_conf.consumer.consumer_timeout_ms,
             max_records=kafka_conf.consumer.max_records)
         if message:
-            while use_gpu():
-                print("sleeping")
-                time.sleep(kafka_conf.consumer.sleep)
             envs = {}
             for key, value in message.items():
                 envs = json.loads(value[0].value)

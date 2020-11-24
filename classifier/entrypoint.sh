@@ -2,7 +2,7 @@
 
 echo "CLEAR EX-TRAINED-MODEL AND IMAGES"
 rm -rf $MODEL_SAVE_PATH/*
-# rm -rf $IMAGE_DIR_PATH/*
+rm -rf $IMAGE_DIR_PATH/*
 
 echo "DOWNLOAD IMAGES FROM FILESHARE"
 python /home/classifier/download_from_fileshare.py
