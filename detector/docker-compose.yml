@@ -6,7 +6,7 @@ services:
                 command: /home/detector/workspace/entrypoint.sh
                 runtime: nvidia
                 environment:
-                        - "NUM_CLASS=${NUM_CLASS}"
+                        - "NUM_CLASSES=${NUM_CLASSES}"
                         - "IMAGE_SIZE=${IMAGE_SIZE}"
                         - "BATCH_SIZE=${BATCH_SIZE}"
                         - "TOTAL_STEP=${TOTAL_STEP}"

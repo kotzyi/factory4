@@ -12,7 +12,7 @@ def main():
     pre_trained_model_path = os.path.join(pre_trained_model_root_path, model_name)
     pipeline = os.path.join(pre_trained_model_path, "pipeline.config")
     edited_pipeline = os.getenv('MODEL_PIPELINE_CONFIG_PATH')
-    num_classes = int(os.getenv('NUM_CLASS'))
+    num_classes = int(os.getenv('NUM_CLASSES'))
     image_size = int(os.getenv('IMAGE_SIZE'))
     batch_size = int(os.getenv('BATCH_SIZE'))
     total_step = int(os.getenv('TOTAL_STEP'))
