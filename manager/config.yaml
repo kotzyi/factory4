@@ -70,7 +70,7 @@ kafka:
         bootstrap_servers: 52.141.56.0:9092
         producer: &default_producer
             partition: 0
-            topics: [CVT_OD_TF_MDL]
+            topics: [CVT_OD_TF_MDL, REQ_CRT_CL_MDL]
         consumer: &default_consumer
             consumer_group_id: OBJECT_DETECTOR
             topics: [REQ_CVT_TF_MDL]
@@ -86,7 +86,7 @@ kafka:
         consumer:
             <<: *default_consumer
             consumer_group_id: CLASSIFIER
-            topics: [REQ_CVT_TF_MDL]
+            topics: [REQ_CRT_CL_MDL]
     converter:
         bootstrap_servers: 52.141.56.0:9092
         producer:
