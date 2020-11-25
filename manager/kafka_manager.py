@@ -19,7 +19,8 @@ class KafkaManager:
         self.consumer.subscribe(topics=conf.consumer.topics)
 
     def produce(self, value):
-        self.producer.send(topic=self.conf.producer.topic, value=value)
+        for topic in self.conf.producer.topics:
+            self.producer.send(topic=topic, value=value)
 
     def poll(self, timeout_ms, max_records):
         return self.consumer.poll(timeout_ms=timeout_ms, max_records=max_records)

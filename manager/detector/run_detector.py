@@ -40,7 +40,7 @@ def main():
 
             envs = {**envs, **model_conf[envs['DETECTOR_MODEL_NAME']].to_dict()}
             detector.add_env(envs)
-            detector.run()
+            # detector.run()
             detect_kafka_manager.produce(envs)
         else:
             time.sleep(kafka_conf.consumer.sleep)
