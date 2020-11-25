@@ -38,6 +38,7 @@ def main():
             logger.info(f"CONSUMER_GROUP_ID: {kafka_conf.consumer.consumer_group_id}")
             logger.info(f"VALUES: {envs}")
 
+            envs = {**envs, **model_conf[envs['DETECTOR_MODEL_NAME']].to_dict()}
             detector.add_env(envs)
             detector.run()
             detect_kafka_manager.produce(envs)

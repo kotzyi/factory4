@@ -12,12 +12,12 @@ class TestModelGeneration(unittest.TestCase):
         msg['FACTORY_ID'] = "233"
         msg['LEARN_ID'] = "252"
         msg['AZURE_SHARE_NAME'] = "models"
-        msg['AZURE_CLASS_IMAGE_DIR_PATH'] = "detach/train_images"
+        msg['AZURE_CLASS_IMAGE_DIR_PATH'] = "detach/images_1"
         msg['AZURE_OBJECT_IMAGE_DIR_PATH'] = "detach/images"
         msg['AZURE_LABEL_DIR_PATH'] = "detach/annotations"
         msg['AZURE_MODEL_DIR_PATH'] = "detach/models"
         msg['CLASSIFIER_MODEL_NAME'] = "b0"
-        msg['DETECTOR_MODEL_NAME'] = "efficientdet_d0_coco17_tpu-32"
+        msg['DETECTOR_MODEL_NAME'] = "d0"
 
         self.producer = KafkaProducer(
             bootstrap_servers=KafkaConfig.detector.bootstrap_servers,

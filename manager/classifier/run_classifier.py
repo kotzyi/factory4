@@ -33,17 +33,15 @@ def main():
             for key, value in message.items():
                 envs = json.loads(value[0].value)
 
-            print("MODELNAME:", model_conf[envs['CLASSIFIER_MODEL_NAME']].IMAGE_SIZE)
-
             logger.info(f"MSG RECEIVED")
             logger.info(f"TOPIC: {kafka_conf.consumer.topics}")
             logger.info(f"CONSUMER_GROUP_ID: {kafka_conf.consumer.consumer_group_id}")
             logger.info(f"VALUES: {envs}")
 
-            classifier.add_env(model_conf[envs['CLASSIFIER_MODEL_NAME']])
-            # classifier.add_env(envs)
-            # classifier.run()
-            # classifier_kafka_manager.produce(envs)
+            envs = {**envs, **model_conf[envs['CLASSIFIER_MODEL_NAME']].to_dict()}
+            classifier.add_env(envs)
+            classifier.run()
+            classifier_kafka_manager.produce(envs)
         else:
             time.sleep(kafka_conf.consumer.sleep)
 

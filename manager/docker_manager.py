@@ -13,8 +13,6 @@ class DockerManager:
             runtime=self.conf.runtime,
             environment=self.conf.environment,
             volumes=self.conf.volumes,
-            remove=True,
-            auto_remove=True,
         )
 
     def add_env(self, envs):

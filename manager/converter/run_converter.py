@@ -46,7 +46,7 @@ def main():
             converter.add_env(envs)
             converter.add_volumes(model_volumes)
             converter.run()
-            # converter_kafka_manager.produce(envs)
+            converter_kafka_manager.produce(envs)
         else:
             time.sleep(kafka_conf.consumer.sleep)
 
