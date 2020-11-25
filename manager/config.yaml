@@ -73,7 +73,7 @@ kafka:
             topics: [CVT_OD_TF_MDL, REQ_CRT_CL_MDL]
         consumer: &default_consumer
             consumer_group_id: OBJECT_DETECTOR
-            topics: [REQ_CVT_TF_MDL]
+            topics: [REQ_CRT_TF_MDL]
             consumer_timeout_ms: 5000
             sleep: 3
             max_records: 1
@@ -91,7 +91,7 @@ kafka:
         bootstrap_servers: 52.141.56.0:9092
         producer:
             <<: *default_producer
-            topics: [RESP_CVT_TF_MDL]
+            topics: [RESP_CRT_TF_MDL]
         consumer:
             <<: *default_consumer
             consumer_group_id: TF_CONVERTER

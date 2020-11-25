@@ -23,7 +23,7 @@ class TestModelGeneration(unittest.TestCase):
             bootstrap_servers=KafkaConfig.detector.bootstrap_servers,
             value_serializer=lambda x: json.dumps(x, default=json_util.default).encode('utf-8'))
 
-        self.producer.send(topic='REQ_CVT_TF_MDL', value=msg)
+        self.producer.send(topic='REQ_CRT_TF_MDL', value=msg)
 
 
 if __name__ == '__main__':
