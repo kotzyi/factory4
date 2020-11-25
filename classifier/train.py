@@ -20,7 +20,8 @@ def main():
     learning_rate = os.getenv("LEARNING_RATE")
     batch_size = int(os.getenv("BATCH_SIZE"))
     num_classes = int(os.getenv("NUM_CLASSES"))
-    image_dir = os.getenv("IMAGE_DIR_PATH")
+    train_image_dir = os.getenv("TRAIN_IMAGE_DIR_PATH")
+    val_image_dir = os.getenv("VAL_IMAGE_DIR_PATH")
     model_name = os.getenv("MODEL_NAME")
     pre_trained_model_path = os.getenv("PRE_TRAINED_MODEL_PATH")
     model_save_path = os.path.join(os.getenv("MODEL_SAVE_PATH"), "saved_model")
@@ -28,7 +29,7 @@ def main():
     classifier = Classifier(model_name, learning_rate, pre_trained_model_path)
     image_size = classifier.image_size
 
-    dataset = Dataset(batch_size, image_size, num_classes, image_dir)
+    dataset = Dataset(batch_size, image_size, num_classes, train_image_dir, val_image_dir)
     train_dataset, val_dataset = dataset.build_dataset()
 
     with strategy.scope():
