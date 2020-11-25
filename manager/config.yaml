@@ -111,6 +111,8 @@ docker:
             - EPOCHS=3
             - MODEL_SAVE_PATH=/home/classifier/models/exported-models
             - PRE_TRAINED_MODEL_PATH=/home/classifier/models/pre-trained-models
+            - TRAIN_IMAGE_DIR_PATH=/home/classifier/images/train
+            - VAL_IMAGE_DIR_PATH=/home/classifier/images/val
             - IMAGE_DIR_PATH=/home/classifier/images
             - AZURE_STORAGE_CONNECTION_STRING=DefaultEndpointsProtocol=https;AccountName=storagefactory4kr;AccountKey=Q9dUPJxdR3a5RU4F0r3lhK9r9ajKmbASVLx3uxclkRvwLDW2FOx9T+9uvoK6tVRxPy4/9Mi64pP/tbfAf5Ncnw==;EndpointSuffix=core.windows.net
             - MODEL_NAME=b0

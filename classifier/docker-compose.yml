@@ -12,6 +12,8 @@ services:
                         - "MODEL_SAVE_PATH=${MODEL_SAVE_PATH}"
                         - "PRE_TRAINED_MODEL_PATH=${PRE_TRAINED_MODEL_PATH}"
                         - "IMAGE_DIR_PATH=${IMAGE_DIR_PATH}"
+                        - "TRAIN_IMAGE_DIR_PATH=${TRAIN_IMAGE_DIR_PATH}"
+                        - "VAL_IMAGE_DIR_PATH=${VAL_IMAGE_DIR_PATH}"
                         - "MODEL_NAME=${MODEL_NAME}"
                         - "BATCH_SIZE=${BATCH_SIZE}"
                         - "NUM_CLASSES=${NUM_CLASSES}"

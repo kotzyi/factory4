@@ -5,7 +5,7 @@ import tensorflow as tf
 def main():
     model_file_name = str(os.getenv('MODEL_FILENAME_PREFIX')) + "_" + os.getenv('MODEL_FILE_NAME')
     saved_model_dir = os.getenv('EXPORTED_MODEL_SAVED_PATH')
-    image_size = 224
+    image_size = 600
 
     model = tf.saved_model.load(saved_model_dir)
     model.signatures[tf.saved_model.DEFAULT_SERVING_SIGNATURE_DEF_KEY].inputs[0].set_shape([1, image_size, image_size, 3])

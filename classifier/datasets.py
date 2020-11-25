@@ -12,17 +12,16 @@ class Dataset:
     def build_dataset(self):
         self.train_dataset = tf.keras.preprocessing.image_dataset_from_directory(
             self.train_image_dir,
-            validation_split=0.2,
-            subset="training",
+            validation_split=None,
             label_mode='categorical',
             seed=1337,
+            shuffle=True,
             image_size=self.image_size,
             batch_size=self.batch_size,
         )
         self.val_dataset = tf.keras.preprocessing.image_dataset_from_directory(
             self.val_image_dir,
-            validation_split=0.2,
-            subset="validation",
+            validation_split=None,
             label_mode='categorical',
             seed=1337,
             shuffle=False,
