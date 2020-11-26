@@ -35,18 +35,23 @@ def main():
             for key, value in message.items():
                 envs = json.loads(value[0].value)
                 topic = key.topic
-            model_volumes.append([docker_conf.model_volume_by_topic[topic]])
-            envs['MODEL_FILENAME_PREFIX'] = docker_conf.model_filename_prefix_by_topic[topic]
 
-            logger.info(f"MSG RECEIVED")
-            logger.info(f"TOPIC: {topic}")
-            logger.info(f"CONSUMER_GROUP_ID: {kafka_conf.consumer.consumer_group_id}")
-            logger.info(f"VALUES: {envs}")
+            try:
+                model_volumes.append([docker_conf.model_volume_by_topic[topic]])
+                envs['MODEL_FILENAME_PREFIX'] = docker_conf.model_filename_prefix_by_topic[topic]
 
-            converter.add_env(envs)
-            converter.add_volumes(model_volumes)
-            # converter.run()
-            converter_kafka_manager.produce(envs)
+                logger.info(f"MSG RECEIVED")
+                logger.info(f"TOPIC: {topic}")
+                logger.info(f"CONSUMER_GROUP_ID: {kafka_conf.consumer.consumer_group_id}")
+                logger.info(f"VALUES: {envs}")
+
+                converter.add_env(envs)
+                converter.add_volumes(model_volumes)
+                # converter.run()
+                converter_kafka_manager.produce(envs)
+            except Exception:
+                print("FAIL TO PROCESS: ", envs)
+
         else:
             time.sleep(kafka_conf.consumer.sleep)
 

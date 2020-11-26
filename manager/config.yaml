@@ -75,7 +75,7 @@ kafka:
             consumer_group_id: OBJECT_DETECTOR
             topics: [REQ_CRT_TF_MDL]
             consumer_timeout_ms: 5000
-            sleep: 3
+            sleep: 10
             max_records: 1
     classifier:
         model_type: classifier

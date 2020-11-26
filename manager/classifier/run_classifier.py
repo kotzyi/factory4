@@ -32,16 +32,18 @@ def main():
             envs = {}
             for key, value in message.items():
                 envs = json.loads(value[0].value)
+            try:
+                logger.info(f"MSG RECEIVED")
+                logger.info(f"TOPIC: {kafka_conf.consumer.topics}")
+                logger.info(f"CONSUMER_GROUP_ID: {kafka_conf.consumer.consumer_group_id}")
+                logger.info(f"VALUES: {envs}")
 
-            logger.info(f"MSG RECEIVED")
-            logger.info(f"TOPIC: {kafka_conf.consumer.topics}")
-            logger.info(f"CONSUMER_GROUP_ID: {kafka_conf.consumer.consumer_group_id}")
-            logger.info(f"VALUES: {envs}")
-
-            envs = {**envs, **model_conf[envs['CLASSIFIER_MODEL_NAME']].to_dict()}
-            classifier.add_env(envs)
-            # classifier.run()
-            classifier_kafka_manager.produce(envs)
+                envs = {**envs, **model_conf[envs['CLASSIFIER_MODEL_NAME']].to_dict()}
+                classifier.add_env(envs)
+                # classifier.run()
+                classifier_kafka_manager.produce(envs)
+            except Exception:
+                print("FAIL TO PROCESS: ", envs)
         else:
             time.sleep(kafka_conf.consumer.sleep)
 
