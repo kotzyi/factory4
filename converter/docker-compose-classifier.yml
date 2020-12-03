@@ -2,7 +2,7 @@ version: '3.1'
 services:
         factory4:
                 container_name: converter
-                image: kotzyi/converter:latest
+                image: crfactory4krcenter.azurecr.io/converter:latest
                 command: /home/converter/entrypoint.sh
                 runtime: nvidia
                 environment:

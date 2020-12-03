@@ -2,7 +2,7 @@ version: '3'
 services:
         factory4:
                 container_name: classifier
-                image: kotzyi/classifier:0.1.0
+                image: crfactory4krcenter.azurecr.io/classifier
                 command: /home/classifier/entrypoint.sh
                 runtime: nvidia
                 environment:

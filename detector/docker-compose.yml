@@ -2,7 +2,7 @@ version: '3'
 services:
         factory4:
                 container_name: detector
-                image: kotzyi/detector:latest
+                image: crfactory4krcenter.azurecr.io/detector:latest
                 command: /home/detector/workspace/entrypoint.sh
                 runtime: nvidia
                 environment:

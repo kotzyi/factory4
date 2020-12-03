@@ -100,7 +100,7 @@ kafka:
 docker:
     detector:
         build_context: /datadrive/jlee/projects/github.com/kotzyi/factory4/detector
-        image: kotzyi/detector:latest
+        image: crfactory4krcenter.azurecr.io/detector:latest
         command: /home/detector/workspace/entrypoint.sh
         runtime: nvidia
         environment:
@@ -124,7 +124,7 @@ docker:
             - /datadrive/jlee/projects/github.com/kotzyi/factory4/detector/:/home/detector/workspace/
     classifier:
         build_context: /datadrive/jlee/projects/github.com/kotzyi/factory4/classifier
-        image: kotzyi/classifier:0.1.0
+        image: crfactory4krcenter.azurecr.io/classifier:latest
         command: /home/classifier/entrypoint.sh
         runtime: nvidia
         environment:
@@ -138,7 +138,7 @@ docker:
             - /datadrive/jlee/projects/github.com/kotzyi/factory4/classifier/:/home/classifier/
     converter:
         build_context: /datadrive/jlee/projects/github.com/kotzyi/factory4/converter
-        image: kotzyi/converter:latest
+        image: crfactory4krcenter.azurecr.io/converter:latest
         command: /home/converter/entrypoint.sh
         runtime: nvidia
         environment:
