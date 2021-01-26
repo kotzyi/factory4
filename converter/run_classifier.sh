@@ -1,4 +1,5 @@
 #!/bin/bash
+IMAEG_SIZE=300 \
 MODEL_FILENAME_PREFIX=b0 \
 AZURE_SHARE_NAME=models \
 AZURE_MODEL_DIR_PATH=detach/models \

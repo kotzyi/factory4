@@ -40,7 +40,7 @@ def main():
 
                 envs = {**envs, **model_conf[envs['CLASSIFIER_MODEL_NAME']].to_dict()}
                 classifier.add_env(envs)
-                # classifier.run()
+                classifier.run()
                 classifier_kafka_manager.produce(envs)
             except Exception:
                 print("FAIL TO PROCESS: ", envs)

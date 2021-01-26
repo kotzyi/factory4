@@ -45,8 +45,8 @@ class Classifier:
 
     def build_model(self, num_classes):
         inputs = layers.Input(shape=(self.image_size, self.image_size, 3))
-        x = self.img_augmentation(inputs)
-        model = self.base_model(include_top=False, input_tensor=x, weights=self.weight_path)
+        # x = self.img_augmentation(inputs)
+        model = self.base_model(include_top=False, input_tensor=inputs, weights=self.weight_path)
 
         # Freeze the pretrained weights
         model.trainable = False
@@ -79,6 +79,6 @@ class Classifier:
         )
 
     def step_decay_scheduler(self, epoch):
-        drop = 0.5
-        epochs_drop = 10.0
+        drop = 0.7
+        epochs_drop = 20.0
         return self.lr * math.pow(drop, math.floor((1 + epoch) / epochs_drop))

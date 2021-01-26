@@ -39,7 +39,7 @@ def main():
 
     # Adding Callbacks to model
     terminate_on_nan = TerminateOnNaN()
-    learning_rate_scheduler = LearningRateScheduler(classifier.step_decay_scheduler, verbose=0)
+    learning_rate_scheduler = LearningRateScheduler(classifier.step_decay_scheduler, verbose=1)
     tensorboard = TensorBoard(
         log_dir='./logs',
         histogram_freq=0,

@@ -6,6 +6,7 @@ services:
                 command: /home/converter/entrypoint.sh
                 runtime: nvidia
                 environment:
+                        - "IMAGE_SIZE=${IMAGE_SIZE}"
                         - "EXPORTED_MODEL_SAVED_PATH=${EXPORTED_MODEL_SAVED_PATH}"
                         - "MODEL_FILE_NAME=${MODEL_FILE_NAME}"
                         - "AZURE_SHARE_NAME=${AZURE_SHARE_NAME}"
