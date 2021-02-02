@@ -79,6 +79,6 @@ class Classifier:
         )
 
     def step_decay_scheduler(self, epoch):
-        drop = 0.7
-        epochs_drop = 20.0
+        drop = 0.99
+        epochs_drop = 1.0
         return self.lr * math.pow(drop, math.floor((1 + epoch) / epochs_drop))

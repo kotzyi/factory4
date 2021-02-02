@@ -1,6 +1,6 @@
 import os
 import tensorflow as tf
-from tensorflow.keras.callbacks import TensorBoard, TerminateOnNaN, LearningRateScheduler
+from tensorflow.keras.callbacks import TensorBoard, TerminateOnNaN, LearningRateScheduler, ModelCheckpoint
 from datasets import Dataset
 from model import Classifier
 
@@ -51,7 +51,15 @@ def main():
         embeddings_metadata=None,
         embeddings_data=None,
         update_freq='epoch')
-    callbacks = [tensorboard, terminate_on_nan, learning_rate_scheduler]
+
+    model_checkpoint_callback = ModelCheckpoint(
+        filepath=model_save_path,
+        save_weights_only=False,
+        monitor='val_accuracy',
+        mode='max',
+        save_best_only=True)
+
+    callbacks = [tensorboard, terminate_on_nan, learning_rate_scheduler, model_checkpoint_callback]
 
     model.fit(
         train_dataset,
@@ -59,8 +67,6 @@ def main():
         validation_data=val_dataset,
         verbose=1,
         callbacks=callbacks)
-
-    model.save(model_save_path)
 
 
 if __name__ == "__main__":
