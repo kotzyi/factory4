@@ -34,7 +34,11 @@ class Classifier:
         self.model_name = model_name
         self.lr = float(learning_rate)
         self.base_model, self.image_size = base_model[model_name]
-        self.weight_path = os.path.join(pre_trained_model_path, self.model_name+".h5")
+        if model_name.startswith('b'):
+            self.weight_path = os.path.join(pre_trained_model_path, self.model_name+".h5")
+        else:
+            self.weight_path = 'imagenet'
+
         self.img_augmentation = Sequential(
             [
                 preprocessing.RandomRotation(factor=0.15),
