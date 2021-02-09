@@ -1,13 +1,13 @@
 #!/bin/bash
 
 NUM_CLASSES=2 \
-IMAGE_SIZE=512 \
-BATCH_SIZE=8 \
-TOTAL_STEP=3000 \
+IMAGE_SIZE=320 \
+BATCH_SIZE=16 \
+TOTAL_STEP=5000 \
 NUM_BOXES=100 \
 REPLICAS_TO_AGGREGATE=8 \
 MODEL_TYPE=detection \
-WARMUP_STEP=0 \
+WARMUP_STEP=1000 \
 CLASSIFICATION_WEIGHT=1.0 \
 LOCALIZATION_WEIGHT=1.0 \
 IMAGE_PATH=/home/detector/workspace/images \
@@ -26,7 +26,7 @@ MODEL_SAVE_PATH=/home/detector/workspace/models/exported-models \
 TRAINED_CHECKPOINT_PATH=/home/detector/workspace/models/trained-models \
 PRE_TRAINED_MODEL_PATH=/home/detector/workspace/models/pre-trained-models \
 AZURE_STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=storagefactory4kr;AccountKey=Q9dUPJxdR3a5RU4F0r3lhK9r9ajKmbASVLx3uxclkRvwLDW2FOx9T+9uvoK6tVRxPy4/9Mi64pP/tbfAf5Ncnw==;EndpointSuffix=core.windows.net" \
-MODEL_NAME=efficientdet_d0_coco17_tpu-32 \
+MODEL_NAME=ssd_mobilenet_v2_320x320_coco17_tpu-8 \
 AZURE_SHARE_NAME=models \
 AZURE_OBJECT_IMAGE_DIR_PATH=detach/images \
 AZURE_LABEL_DIR_PATH=detach/annotations \

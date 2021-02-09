@@ -35,8 +35,12 @@ def main():
 
     model_config = pipeline_config.model.ssd
     model_config.num_classes = num_classes
-    model_config.image_resizer.keep_aspect_ratio_resizer.min_dimension = image_size
-    model_config.image_resizer.keep_aspect_ratio_resizer.max_dimension = image_size
+    if model_name.startswith("ssd"):
+        model_config.image_resizer.fixed_shape_resizer.height = image_size
+        model_config.image_resizer.fixed_shape_resizer.width = image_size
+    else:
+        model_config.image_resizer.keep_aspect_ratio_resizer.min_dimension = image_size
+        model_config.image_resizer.keep_aspect_ratio_resizer.max_dimension = image_size
     model_config.loss.classification_weight = classification_weight
     model_config.loss.localization_weight = localization_weight
 
