@@ -1,5 +1,6 @@
 #!/bin/bash
-IMAGE_SIZE=300 \
+IMAGE_SIZE=224 \
+IMAGE_DIR=/home/converter/images \
 MODEL_FILENAME_PREFIX=b0 \
 AZURE_SHARE_NAME=models \
 AZURE_MODEL_DIR_PATH=detach/models \
