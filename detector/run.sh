@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 NUM_CLASSES=1 \
 IMAGE_SIZE=500 \
