@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 
 echo "CLEAR EX-TRAINED-MODEL AND IMAGES"
 rm -rf $MODEL_SAVE_PATH/*

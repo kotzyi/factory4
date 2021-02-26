@@ -2,10 +2,10 @@
 
 echo "CLEAR EX-TRAINED-MODEL AND IMAGES"
 rm -r $MODEL_SAVE_PATH/*
-rm -r $IMAGE_DIR_PATH/*
+# rm -r $IMAGE_DIR_PATH/*
 
 echo "DOWNLOAD IMAGES FROM FILESHARE"
-python /home/classifier/download_from_fileshare.py
+# python /home/classifier/download_from_fileshare.py
 
 echo "UPDATE EFFICIENT-NET LATEST WEIGHT"
 python /home/classifier/efficient_weight_update.py \

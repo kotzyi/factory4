@@ -1,12 +1,12 @@
 #!/bin/bash
 LEARNING_RATE=1e-2 \
-EPOCHS=150 \
+EPOCHS=10 \
 MODEL_SAVE_PATH=/home/classifier/models/exported-models \
 PRE_TRAINED_MODEL_PATH=/home/classifier/models/pre-trained-models \
 IMAGE_DIR_PATH=/home/classifier/images \
 TRAIN_IMAGE_DIR_PATH=/home/classifier/images/train \
 VAL_IMAGE_DIR_PATH=/home/classifier/images/val \
-MODEL_NAME=b0 \
+MODEL_NAME=b3 \
 BATCH_SIZE=16 \
 NUM_CLASSES=2 \
 AZURE_SHARE_NAME=models \

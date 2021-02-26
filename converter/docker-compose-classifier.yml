@@ -7,6 +7,7 @@ services:
                 runtime: nvidia
                 environment:
                         - "EXPORTED_MODEL_SAVED_PATH=${EXPORTED_MODEL_SAVED_PATH}"
+                        - "IMAGE_SIZE=${IMAGE_SIZE}"
                         - "IMAGE_DIR=${IMAGE_DIR}"
                         - "MODEL_FILE_NAME=${MODEL_FILE_NAME}"
                         - "AZURE_SHARE_NAME=${AZURE_SHARE_NAME}"
@@ -14,5 +15,4 @@ services:
                         - "AZURE_STORAGE_CONNECTION_STRING=${AZURE_STORAGE_CONNECTION_STRING}"
                 volumes:
                         - /datadrive/jlee/projects/github.com/kotzyi/factory4/classifier/models/exported-models:/home/converter/exported-models
-                        - - /datadrive/jlee/projects/github.com/kotzyi/factory4/classifier/images/train/0:/home/converter/images
                         - /datadrive/jlee/projects/github.com/kotzyi/factory4/converter:/home/converter

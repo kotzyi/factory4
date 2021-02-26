@@ -15,5 +15,4 @@ services:
                         - "AZURE_STORAGE_CONNECTION_STRING=${AZURE_STORAGE_CONNECTION_STRING}"
                 volumes:
                         - /datadrive/jlee/projects/github.com/kotzyi/factory4/detector/models/exported-models:/home/converter/exported-models
-                        - /datadrive/jlee/projects/github.com/kotzyi/factory4/detector/images:/home/converter/images
                         - /datadrive/jlee/projects/github.com/kotzyi/factory4/converter:/home/converter
