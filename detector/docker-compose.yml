@@ -14,6 +14,8 @@ services:
                         - "REPLICAS_TO_AGGREGATE=${REPLICAS_TO_AGGREGATE}"
                         - "MODEL_TYPE=${MODEL_TYPE}"
                         - "WARMUP_STEP=${WARMUP_STEP}"
+                        - "LEARNING_RATE=${LEARNING_RATE}"
+                        - "WARMUP_LEARNING_RATE=${WARMUP_LEARNING_RATE}"
                         - "CLASSIFICATION_WEIGHT=${CLASSIFICATION_WEIGHT}"
                         - "LOCALIZATION_WEIGHT=${LOCALIZATION_WEIGHT}"
                         - "IMAGE_PATH=${IMAGE_PATH}"

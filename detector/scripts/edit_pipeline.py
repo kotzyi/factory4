@@ -19,6 +19,8 @@ def main():
     num_boxes = int(os.getenv('NUM_BOXES'))
     replicas_to_aggregate = int(os.getenv('REPLICAS_TO_AGGREGATE'))
     model_type = os.getenv('MODEL_TYPE')
+    base_lr = float(os.getenv('LEARNING_RATE'))
+    warmup_lr = float(os.getenv('WARMUP_LEARNING_RATE'))
     warmup_step = int(os.getenv('WARMUP_STEP'))
     classification_weight = float(os.getenv("CLASSIFICATION_WEIGHT"))
     localization_weight = float(os.getenv("LOCALIZATION_WEIGHT"))
@@ -56,6 +58,8 @@ def main():
     optimizer_config = pipeline_config.train_config.optimizer.momentum_optimizer.learning_rate.cosine_decay_learning_rate
     optimizer_config.total_steps = total_step
     optimizer_config.warmup_steps = warmup_step
+    optimizer_config.learning_rate_base = base_lr
+    optimizer_config.warmup_learning_rate = warmup_lr
 
     pipeline_config.eval_input_reader[0].label_map_path = os.getenv('TEST_IMAGE_LABEL_PATH')
     pipeline_config.eval_input_reader[0].tf_record_input_reader.input_path[0] = os.getenv('TEST_IMAGE_TFRECORD_PATH')
